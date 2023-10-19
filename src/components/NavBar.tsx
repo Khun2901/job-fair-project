@@ -1,4 +1,5 @@
 import Link from 'next/link'
+//will useRouter in future
 
 export default function NavBar() {
     return(
