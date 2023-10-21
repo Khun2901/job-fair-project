@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer'
 import NavBar from '@/components/NavBar'
-import Image from 'next/image'
+import Hero from '@/components/Hero'
 
 export default function Home() {
   return (
@@ -8,9 +8,7 @@ export default function Home() {
     <main>
       <title>Hello World</title>
       <NavBar />
-      <div className='h-[1000px] p-[100px]'>
-        Hello
-      </div>
+      <Hero />
       <Footer />
     </main>
   )

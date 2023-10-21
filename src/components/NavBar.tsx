@@ -1,20 +1,40 @@
+'use client'
 import Link from 'next/link'
 //will useRouter in future
 
 export default function NavBar() {
     return(
-        <header className="fixed w-full top-0 bg-white h-15 lg:h-20 flex items-center shadow-md z-[100]">
-            <div className="w-11/12 mx-auto flex justify-between items-center" >
-                <Link href="/">
-                <div className="flex gap-3 w-fit items-center" >
-                    
-                    <h1 className="text-2xl lg:text-3xl text-[#657CBC] font-bold" >Job Fair?</h1>
-                </div></Link>
-                {/* <Link href="/demo">
-                <a className="flex h-fit p-2 items-center text-md lg:text-xl bg-purple-400 text-white px-5 lg:px-10 rounded-full hover:bg-purple-500 transition">
-                    Try demo !
-                </a></Link> */}
+        <div className='h-[75px] p-[9px] bg-blue-50 fixed top-0 inset-x-0 z-[30] border-b border-t flex flex-row'>
+            
+            <div className='grow flex flex-row justify-start gap-10 ml-[40px] place-items-center'>
+
+                <div>
+                    Logo
+                </div>
+
+                <div>
+                    Home
+                </div>
+
+                <div>
+                    Company
+                </div>
+
+                <div>
+                    Interview
+                </div>
+
             </div>
-        </header>
+
+            <div className='grow flex flex-row justify-end gap-10 mr-5 h-[100%] place-items-center'>
+                
+                {/* session? */}
+                <button className='border-[2px] border-[#000000] rounded-md px-4 py-1'>
+                    Sign In or Register
+                </button>
+
+            </div>
+
+        </div>
     )
 }
