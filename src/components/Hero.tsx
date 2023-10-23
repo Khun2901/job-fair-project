@@ -11,7 +11,7 @@ export default function Hero() {
             <Image src={'/banner.png'} alt="background" fill={true} objectFit='cover' priority/>
             <div className='relative top-[25%] z-20 text-left max-w-[51%] px-20'>
                 <h1 className='text-4xl font-bold mb-2'>Intanuay Job Fair</h1>
-                <h2 className='text-3xl font-semibold mb-4'>"Connecting Talent, Fueling Dreams"</h2>
+                <h2 className='text-2xl font-semibold mb-4'>"Connecting Talent, Fueling Dreams"</h2>
                 <h3 className='text-xl font-serif text-justify'>Our online Intanuay Job Fair is a platform 
                 for you to take control of your future, gain practical experience, and learn from industry experts. 
                 Whether you're a student seeking internships, a fresh graduate looking for your first job, or an 

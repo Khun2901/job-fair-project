@@ -1,7 +1,7 @@
 export default function InterviewPage() {
     return(
-        <div>
-            Hello World
+        <div className="mt-[90px] text-8xl">
+            ล็อกอินก่อนไอควาย!!
         </div>
     )
 }
