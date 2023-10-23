@@ -8,21 +8,21 @@ export default function NavBar() {
             
             <div className='grow flex flex-row justify-start gap-10 ml-[40px] place-items-center'>
 
-                <div>
+                <Link href='/'><div>
                     Logo
-                </div>
+                </div></Link>
 
-                <div>
+                <Link href='/'><div>
                     Home
-                </div>
+                </div></Link>
 
-                <div>
+                <Link href='/company'><div>
                     Company
-                </div>
+                </div></Link>
 
-                <div>
+                <Link href='/interview'><div>
                     Interview
-                </div>
+                </div></Link>
 
             </div>
 

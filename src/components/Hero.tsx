@@ -16,12 +16,20 @@ export default function Hero() {
                 for you to take control of your future, gain practical experience, and learn from industry experts. 
                 Whether you're a student seeking internships, a fresh graduate looking for your first job, or an 
                 experienced professional ready for a change, we're here to guide you on your beautiful journey.</h3>
-                <button className='bg-[#111b47] text-white border-[#111b47]
-                    font-semibold text-[18px] py-1 px-4 rounded-lg mt-10
-                    hover:bg-white hover:text-[#111b47] hover:border-[#111b47]'
-                    onClick={(e)=>{e.stopPropagation(); router.push('/company')}}>
-                    Browse Company
-                </button>
+                <div className='flex justify-evenly'>
+                    <button className='w-[200px] bg-[#111b47] text-white border-[#111b47]
+                        font-semibold text-[18px] py-1 px-4 rounded-lg mt-10 border-2 
+                        hover:bg-white hover:text-[#111b47] hover:border-[#111b47]'
+                        onClick={(e)=>{e.stopPropagation(); router.push('/company')}}>
+                        Browse Company
+                    </button>
+                    <button className='w-[200px] text-[#111b47] bg-white border-[#111b47]
+                        font-semibold text-[18px] py-1 px-4 rounded-lg mt-10 border-2 
+                        hover:bg-[#111b47] hover:text-white'
+                        onClick={(e)=>{e.stopPropagation(); router.push('/interview')}}>
+                        Interview Session
+                    </button>
+                </div>
             </div>
 
             

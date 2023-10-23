@@ -1,7 +1,7 @@
-export default function Home() {
+export default function CompanyPage() {
     return(
-        <div>
+        <main>
             Hello World
-        </div>
+        </main>
     )
 }
