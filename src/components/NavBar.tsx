@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import Image from 'next/image'
 //will useRouter in future
 
 export default function NavBar() {
@@ -27,6 +28,10 @@ export default function NavBar() {
             </div>
 
             <div className='grow flex flex-row justify-end gap-10 mr-5 h-[100%] place-items-center'>
+
+                <Link href='/interviewcart'>
+                    <Image src='/bookingcart.png' width={30} height={30} alt='bookingcart'/>
+                </Link>
                 
                 {/* session? */}
                 <button className='border-[2px] border-[#000000] rounded-md px-4 py-1'>
