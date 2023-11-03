@@ -18,8 +18,7 @@ export default function InterviewForm(){
     return(
         <div className='relative block w-screen h-screen'>
 
-            <Image src='/interview.png' className='opacity-40' fill={true} 
-            objectFit='cover' alt='interview' priority/>
+            <Image src='/interview.png' className='opacity-40' fill={true} objectFit='cover' alt='interview' priority/>
         
             <form className='relative mt-[70px] p-6 z-20'> 
 
@@ -27,9 +26,9 @@ export default function InterviewForm(){
                     Book Your Interview
                 </div>               
 
-                <div className='grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2'>
+                <div className='grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6'>
 
-                    <div className='sm:col-span-1'>
+                    <div className='sm:col-span-3'>
                         <label className='block text-lg font-semibold leading-6 text-gray-900 ml-2 mb-2'>
                             First Name
                         </label>
@@ -46,7 +45,7 @@ export default function InterviewForm(){
                         />        
                     </div>
 
-                    <div className='sm:col-span-1'>
+                    <div className='sm:col-span-3'>
                         <label className='block text-lg font-semibold leading-6 text-gray-900 ml-2 mb-2'>
                             Last Name
                         </label>
@@ -63,7 +62,7 @@ export default function InterviewForm(){
                         />    
                     </div>
 
-                    <div className='sm:col-span-1'>
+                    <div className='sm:col-span-3'>
                         <label className='block text-lg font-semibold leading-6 text-gray-900 ml-2 mb-2'>
                             Select Company
                         </label>
@@ -84,7 +83,7 @@ export default function InterviewForm(){
                         </div>
                     </div>
 
-                    <div className='sm:col-span-1'>
+                    <div className='sm:col-span-3'>
                         <label className='block text-lg font-semibold leading-6 text-gray-900 ml-2 mb-2'>
                             Desired Position
                         </label>

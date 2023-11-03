@@ -34,8 +34,7 @@ export default function NavBar() {
                 </Link>
                 
                 {/* session? */}
-                <button className='border-[2px] border-[#000000] rounded-md px-4 py-1
-                hover:bg-blue-600 hover:text-white hover:border-blue-600'>
+                <button className='border-[2px] border-[#000000] rounded-md px-4 py-1'>
                     Sign In or Register
                 </button>
 
