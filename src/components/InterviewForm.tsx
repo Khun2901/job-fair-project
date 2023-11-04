@@ -1,4 +1,5 @@
 'use client'
+
 import Image from 'next/image'
 import { Select, MenuItem } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
@@ -21,7 +22,7 @@ export default function InterviewForm(){
             <Image src='/interview.png' className='opacity-40' fill={true} 
             objectFit='cover' alt='interview' priority/>
         
-            <form className='relative mt-[70px] p-6 z-20'> 
+            <form className='relative p-6 z-20'> 
 
                 <div className='text-center text-3xl font-bold m-7'>
                     Book Your Interview
