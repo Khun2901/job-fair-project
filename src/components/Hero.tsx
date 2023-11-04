@@ -2,11 +2,13 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
+import { useSession } from 'next-auth/react'
 
 export default function Hero() {
 
     const router = useRouter();
     const ref = useRef<HTMLDivElement>(null);
+    const { data: session } = useSession()
 
     const handleClick = () => {
         ref.current?.scrollIntoView({behavior: 'smooth'});
@@ -38,7 +40,13 @@ export default function Hero() {
                         </button>
                     </div>
                 </div>
+                {
+                    session? <div className='z-30 absolute top-5 right-10 py-2 px-4 font-semibold text-black
+                    text-xl rounded-md bg-slate-200 shadow-lg'>
+                        Welcome, {session.user?.name}</div>:null
+                }
             </div>
+
 
             <div ref={ref} className='relative block w-max-screen h-screen' 
             >

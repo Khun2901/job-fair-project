@@ -1,9 +1,16 @@
-'use client'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import AuthButton from './AuthButton'
 //will useRouter in future
 
-export default function NavBar() {
+export default async function NavBar() {
+
+    const session = await getServerSession(authOptions)
+    const userName = session?.user?.name
+
     return(
         <div className='h-[75px] p-[9px] bg-blue-50 fixed top-0 inset-x-0 z-[30] border-b border-t flex flex-row'>
             
@@ -33,11 +40,8 @@ export default function NavBar() {
                     <Image src='/bookingcart.png' width={30} height={30} alt='bookingcart'/>
                 </Link>
                 
-                {/* session? */}
-                <button className='border-[2px] border-[#000000] rounded-md px-4 py-1
-                hover:bg-blue-600 hover:text-white hover:border-blue-600'>
-                    Sign In or Register
-                </button>
+                {/* session? Recommend to duplicate sign-in and register button */}
+                {session ? <AuthButton session={false}/> :<AuthButton session={true}/>}
 
             </div>
 
