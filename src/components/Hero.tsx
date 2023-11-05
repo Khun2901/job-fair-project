@@ -18,20 +18,21 @@ export default function Hero() {
 
     useEffect(() => {
         AOS.init();
-      }, []);
+    }, []);
 
     return (
+        
         <div>
             <div className='relative block p-[5px] w-max-screen h-screen'>
-                <Image src={'/banner.png'} data-aos='fade-left' data-aos-duration='1000'
+                <Image src={'/banner.png'} rel='preload' data-aos='fade-left'
                 alt="background" fill={true} objectFit='cover' priority/>
                 <div className='relative top-[25%] z-20 text-left max-w-[51%] px-10 md:px-20'>
                     <h1 className='text-md md:text-xl xl:text-4xl font-bold mb-2'>Intanuay Job Fair</h1>
                     <h2 className='text-sm md:text-lg xl:text-2xl font-semibold mb-4'>"Connecting Talent, Fueling Dreams"</h2>
-                    <h3 className='text-sm md:text-md xl:text-lg font-serif text-justify'>A platform 
-                    for you to take control of your future, gain practical experience, and learn from industry experts. 
-                    Whether you're a student seeking internships, a fresh graduate looking for your first job, or a 
-                    professional ready for a change, we're here to guide you on your beautiful journey.</h3>
+                    <h3 className='text-sm md:text-md xl:text-lg font-serif text-justify'>
+                    A platform where you can find a means to advance in your job, 
+                    gain practical experience, and learn from industry experts. 
+                    </h3>
                     <div className='flex justify-evenly gap-4'>
                         <button className='w-auto bg-[#111b47] text-white border-[#111b47]
                             font-semibold text-[18px] py-1 px-10 rounded-lg mt-10 border-2 
@@ -55,10 +56,15 @@ export default function Hero() {
             </div>
 
 
-            <div ref={ref} className='relative block w-max-screen h-screen' 
-            >
-                <Image src={'/scroll1.png'} data-aos='fade-right' data-aos-duration='1000'
+            <div ref={ref} className='relative block w-max-screen h-screen'>
+                <Image src={'/scroll1.png'} rel='preload' data-aos='fade-right'
                 alt="background" fill={true} objectFit='cover' priority/>
+                <div className='relative top-[25%] z-20 text-center px-10 md:px-20'>
+                    <h1 data-aos='fade-up' className='text-md md:text-xl xl:text-4xl font-bold mb-2'>
+                    Whether you're a student seeking internships, a fresh graduate looking for your first job, or a 
+                    professional ready for a change, we're here to guide you on your beautiful journey.
+                    </h1>
+                </div>
             </div>
 
         </div>

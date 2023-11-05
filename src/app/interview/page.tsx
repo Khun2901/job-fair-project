@@ -7,7 +7,7 @@ import Image from 'next/image'
 export default async function InterviewPage() {
 
     const session = await getServerSession(authOptions)
-    if(!session || !session.user.token) return (
+    if(!session) return (
         <div className="my-4 text-xl font-bold">Please Log-in first</div>
     )
 
