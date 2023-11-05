@@ -4,8 +4,7 @@ import { useAppSelector } from "@/redux/store"
 
 export default function CartPage() {
 
-    // const bookingItems = useAppSelector(state => state.bookSlice.bookingItems)
-    const bookingItems = []
+    const bookingItems = useAppSelector(state => state.bookSlice.bookingItems)
 
     return(
         <main className='w-screen h-screen pt-[70px] bg-zinc-300'>

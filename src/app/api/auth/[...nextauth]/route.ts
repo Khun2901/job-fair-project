@@ -44,7 +44,7 @@ export const authOptions: AuthOptions = {
             session.user = token as any;
             return session;
         }
-    }
+    },
 }
 const authHandler = NextAuth(authOptions);
 export {authHandler as GET, authHandler as POST}

@@ -1,14 +1,12 @@
 'use client'
-
-import Image from 'next/image'
-import { Select, MenuItem } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
+import { Select, MenuItem } from '@mui/material'
 import { useState } from 'react'
 import Link from 'next/link'
-import dayjs from 'dayjs'
-import { useDispatch } from 'react-redux'
+import dayjs, { Dayjs } from 'dayjs'
+import { useDispatch } from "react-redux"
 import { AppDispatch } from "@/redux/store"
 import { BookingItem } from "../../interfaces"
 import { addBookingItem } from "@/redux/features/bookSlice"

@@ -15,25 +15,15 @@ export const bookSlice = createSlice({
     reducers: {
 
         addBookingItem: (state, action: PayloadAction<BookingItem>) => {
-            if(state.bookingItems.length > 0) {
-                state.bookingItems.pop()
-                state.bookingItems.push(action.payload)
-            }
-            else{
-                state.bookingItems.push(action.payload)
-            }
+            state.bookingItems.push(action.payload)
         },
 
-        // NOTE: EDIT THIS CODE TO REMOVE BOOKING ITEM
-        // removeBookingItem: (state, action: PayloadAction<BookingItem>) => {
-        //     const remainItems = state.bookingItems.filter( obj => {
-        //         return ()
-        //     })
-        //     state.bookingItems = remainItems
-        // }
+        removeBookingItem: (state, action: PayloadAction<BookingItem>) => {
+            state.bookingItems.pop()
+        }
 
     }
 })
 
-export const { addBookingItem, /*removeBookingItem*/ } = bookSlice.actions
+export const { addBookingItem, removeBookingItem } = bookSlice.actions
 export default bookSlice.reducer
