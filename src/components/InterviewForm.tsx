@@ -7,6 +7,11 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
 import { useState } from 'react'
 import Link from 'next/link'
+import dayjs from 'dayjs'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from "@/redux/store"
+import { BookingItem } from "../../interfaces"
+import { addBookingItem } from "@/redux/features/bookSlice"
 
 export default function InterviewForm(){
 
@@ -16,11 +21,23 @@ export default function InterviewForm(){
     const [position, setPosition] = useState('Full-stack Developer')
     const [interviewDate, setInterviewDate] = useState<Date | null>(null)
 
+    const dispatch = useDispatch<AppDispatch>()
+
+    const makeBooking = () => {
+        if(firstName && lastName && company && position && interviewDate){
+        const item: BookingItem = {
+            firstname: firstName,
+            lastname: lastName,
+            company: company,
+            position: position,
+            interviewdate: dayjs(interviewDate).format("YYYY/MM/DD")
+        }
+        dispatch(addBookingItem(item))
+        }
+    }
+
     return(
         <div className='relative block w-screen h-screen'>
-
-            <Image src='/interview.png' className='opacity-40' fill={true} 
-            objectFit='cover' alt='interview' priority/>
         
             <form className='relative p-6 z-20'> 
 
@@ -35,10 +52,11 @@ export default function InterviewForm(){
                             First Name
                         </label>
                         <input
+                            required
                             type='text'
                             name='first-name' 
                             id='first-name'
-                            className='block w-full px-2 rounded-md border-[1px] border-white py-1.5 
+                            className='block w-full px-2 rounded-md border-[1px] border-neutral-400 py-1.5 
                             text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 
                             focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6
                             hover:border-black'
@@ -52,10 +70,11 @@ export default function InterviewForm(){
                             Last Name
                         </label>
                         <input
+                            required
                             type='text' 
                             name='last-name' 
                             id='last-name'
-                            className='block w-full px-2 rounded-md border-[1px] border-white py-1.5 
+                            className='block w-full px-2 rounded-md border-[1px] border-neutral-400 py-1.5 
                             text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 
                             focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6
                             hover:border-black'
@@ -122,16 +141,6 @@ export default function InterviewForm(){
                     </div>
 
                     <div className='sm:col-span-full flex justify-end gap-5 mr-5'>
-                        
-                        <Link href='/interviewcart'>
-                            <button 
-                            type='submit'
-                            className='rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white 
-                            shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 
-                            focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
-                                SAVE
-                            </button>
-                        </Link>
 
                         <div>
                             <button
@@ -147,6 +156,18 @@ export default function InterviewForm(){
                                 CANCEL
                             </button>
                         </div>
+
+                        <Link href='/interviewcart'>
+                            <button 
+                            type='submit'
+                            className='rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white 
+                            shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 
+                            focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                            onClick={makeBooking}
+                            >
+                                SAVE
+                            </button>
+                        </Link>
 
                     </div>
 

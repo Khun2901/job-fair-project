@@ -20,3 +20,7 @@ body {
   color: rgb(var(--foreground-rgb));
   margin-top: 0;
 }
+
+.text-shadow-md {
+  text-shadow: 8px 8px 16px rgba(12, 24, 36, 1);
+}

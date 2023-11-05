@@ -19,7 +19,6 @@ export default function Hero() {
     useEffect(() => {
         AOS.init({
             duration: 1000,
-            once: true,
         });
     }, []);
 
@@ -59,7 +58,7 @@ export default function Hero() {
                     </div>
                 </div>
                 {
-                    session? <div className='z-30 absolute top-5 right-10 py-2 px-4 font-semibold text-black
+                    session? <div className='z-30 absolute mt-[6%] top-5 right-10 py-2 px-4 font-semibold text-black
                     text-xl rounded-md bg-slate-200 shadow-lg'>
                         Welcome, {session.user?.name}</div>:null
                 }
@@ -69,11 +68,23 @@ export default function Hero() {
             <div ref={ref} className='relative block w-max-screen h-screen'>
                 <Image src={'/scroll1.png'} data-aos='fade-right'
                 alt="background" fill={true} objectFit='cover' priority/>
-                <div className='relative top-[25%] z-20 text-center px-10 md:px-20'>
-                    <h1 data-aos='fade-up' className='text-md md:text-xl xl:text-4xl font-bold mb-2'>
-                    Whether you're a student seeking internships, a fresh graduate looking for your first job, or a 
-                    professional ready for a change, we're here to guide you on your beautiful journey.
+                <div className='relative top-[20%] z-20 text-center text-white text-shadow-md 
+                px-10 md:px-20'>
+                    <h1 data-aos='fade-up' className='text-md md:text-xl xl:text-4xl font-bold mb-8'>
+                        We're here to guide you on your beautiful journey.
                     </h1>
+                    <h2 data-aos='fade-up' data-aos-delay='100' 
+                    className='text-sm md:text-lg xl:text-xl font-semibold mb-4'>
+                        ✔ A student seeking for internships
+                    </h2>
+                    <h2 data-aos='fade-up' data-aos-delay='200' 
+                    className='text-sm md:text-lg xl:text-xl font-semibold mb-4'>
+                        ✔ A fresh graduate looking for your first job
+                    </h2>
+                    <h2 data-aos='fade-up' data-aos-delay='300' 
+                    className='text-sm md:text-lg xl:text-xl font-semibold mb-4'>
+                        ✔ A professional ready for a change
+                    </h2>
                 </div>
             </div>
 
