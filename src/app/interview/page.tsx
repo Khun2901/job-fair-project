@@ -15,9 +15,9 @@ export default async function InterviewPage() {
     var createdAt = new Date(profile.data.createdAt)
 
     return(
-        <main className="flex flex-col items-center">
+        <main className="flex flex-col mt-[90px]">
             
-            <table className="mx-2 table-auto border-separate border-spacing-3 font-bold"><tbody>
+            <table className="mx-2 table-auto border-separate border-spacing-3 text-sm font-bold"><tbody>
                 <tr><td>Name</td><td>{profile.data.name}</td></tr>
                 <tr><td>Email</td><td>{profile.data.email}</td></tr>
                 <tr><td>Tel.</td><td>{profile.data.tel}</td></tr>

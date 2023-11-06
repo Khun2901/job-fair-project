@@ -15,7 +15,20 @@ export const bookSlice = createSlice({
     reducers: {
 
         addBookingItem: (state, action: PayloadAction<BookingItem>) => {
+            if(state.bookingItems.length < 3)
             state.bookingItems.push(action.payload)
+        },
+
+        changeBookingItem: (state, action: PayloadAction<BookingItem>) => {
+            const remainItem = state.bookingItems.filter((obj) => {
+                return (
+                    obj.firstname === action.payload.firstname &&
+                    obj.lastname === action.payload.lastname &&
+                    obj.company === action.payload.company &&
+                    obj.interviewdate === action.payload.interviewdate
+                )
+                })
+            state.bookingItems = remainItem
         },
 
         removeBookingItem: (state, action: PayloadAction<BookingItem>) => {

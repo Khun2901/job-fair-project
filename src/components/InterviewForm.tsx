@@ -39,7 +39,7 @@ export default function InterviewForm(){
         
             <form className='relative p-6 z-20'> 
 
-                <div className='text-center text-3xl font-bold m-7'>
+                <div className='text-center text-3xl font-bold mb-5'>
                     Book Your Interview
                 </div>               
 
