@@ -2,7 +2,6 @@ import InterviewForm from "@/components/InterviewForm";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { getServerSession } from 'next-auth'
 import getUserProfile from "@/libs/getUserProfile";
-import Image from 'next/image'
 
 export default async function InterviewPage() {
 

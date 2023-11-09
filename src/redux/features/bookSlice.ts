@@ -19,20 +19,15 @@ export const bookSlice = createSlice({
             state.bookingItems.push(action.payload)
         },
 
-        changeBookingItem: (state, action: PayloadAction<BookingItem>) => {
-            const remainItem = state.bookingItems.filter((obj) => {
+        removeBookingItem: (state, action: PayloadAction<BookingItem>) => {
+            const remainItems = state.bookingItems.filter((obj) => {
                 return (
-                    obj.firstname === action.payload.firstname &&
-                    obj.lastname === action.payload.lastname &&
-                    obj.company === action.payload.company &&
-                    obj.interviewdate === action.payload.interviewdate
+                    obj.firstname !== action.payload.firstname ||
+                    obj.lastname !== action.payload.lastname ||
+                    obj.company !== action.payload.company
                 )
                 })
-            state.bookingItems = remainItem
-        },
-
-        removeBookingItem: (state, action: PayloadAction<BookingItem>) => {
-            state.bookingItems.pop()
+            state.bookingItems = remainItems
         }
 
     }

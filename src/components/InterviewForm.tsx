@@ -9,14 +9,27 @@ import dayjs, { Dayjs } from 'dayjs'
 import { useDispatch } from "react-redux"
 import { AppDispatch } from "@/redux/store"
 import { BookingItem } from "../../interfaces"
-import { addBookingItem } from "@/redux/features/bookSlice"
+import { addBookingItem, removeBookingItem } from "@/redux/features/bookSlice"
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import { useAppSelector } from '@/redux/store'
 
 export default function InterviewForm(){
 
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [company, setCompany] = useState('Agoda')
-    const [position, setPosition] = useState('Full-stack Developer')
+    const router = useRouter()
+
+    const urlParams = useSearchParams()
+    const firstNameParam = urlParams.get('firstName')
+    const lastNameParam = urlParams.get('lastName')
+    const companyParam = urlParams.get('company')
+    const positionParam = urlParams.get('position')
+    const interviewDateParam = urlParams.get('interviewDate')
+    const statusParam = urlParams.get('status')
+
+    const [firstName, setFirstName] = useState(firstNameParam || '')
+    const [lastName, setLastName] = useState(lastNameParam || '')
+    const [company, setCompany] = useState(companyParam || 'Agoda')
+    const [position, setPosition] = useState(positionParam || 'Full-stack Developer')
     const [interviewDate, setInterviewDate] = useState<Date | null>(null)
 
     const dispatch = useDispatch<AppDispatch>()
@@ -33,6 +46,21 @@ export default function InterviewForm(){
         dispatch(addBookingItem(item))
         }
     }
+
+    const changeBooking = () => {
+        if(firstNameParam && lastNameParam && companyParam && positionParam && interviewDateParam){
+        const item: BookingItem = {
+            firstname: firstNameParam,
+            lastname: lastNameParam,
+            company: companyParam,
+            position: positionParam,
+            interviewdate: interviewDateParam
+        }
+        dispatch(addBookingItem(item))
+        }
+    }
+
+    const bookingItems = useAppSelector(state => state.bookSlice.bookingItems)
 
     return(
         <div className='relative block w-screen h-screen'>
@@ -147,8 +175,10 @@ export default function InterviewForm(){
                             shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 
                             focus-visible:outline-offset-2 focus-visible:outline-red-500'
                             onClick={() => {
-                                setFirstName('')
-                                setLastName('')
+                                if(statusParam === 'edit'){
+                                    changeBooking();
+                                }
+                                router.push('/interviewcart')
                             }}
                             >
                                 CANCEL
@@ -161,7 +191,10 @@ export default function InterviewForm(){
                             className='rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white 
                             shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 
                             focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-                            onClick={makeBooking}
+                            onClick={() => {
+                                makeBooking();
+                                router.push('/interviewcart')
+                            }}
                             >
                                 SAVE
                             </button>
