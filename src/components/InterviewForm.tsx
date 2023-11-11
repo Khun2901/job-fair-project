@@ -60,10 +60,8 @@ export default function InterviewForm(){
         }
     }
 
-    const bookingItems = useAppSelector(state => state.bookSlice.bookingItems)
-
     return(
-        <div className='relative block w-screen h-screen'>
+        <div className='w-auto'>
         
             <form className='relative p-6 z-20'> 
 
@@ -79,6 +77,7 @@ export default function InterviewForm(){
                         </label>
                         <input
                             required
+                            minLength={4}
                             type='text'
                             name='first-name' 
                             id='first-name'
@@ -191,7 +190,8 @@ export default function InterviewForm(){
                             className='rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white 
                             shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 
                             focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-                            onClick={() => {
+                            onClick={(e) => {
+                                e.preventDefault();
                                 makeBooking();
                                 router.push('/interviewcart')
                             }}

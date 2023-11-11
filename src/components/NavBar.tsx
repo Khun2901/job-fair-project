@@ -10,7 +10,7 @@ export default async function NavBar() {
     const session = await getServerSession(authOptions)
 
     return(
-        <div className='h-[12%] p-[9px] bg-blue-50 fixed top-0 inset-x-0 z-[30] border-b border-t flex flex-row'>
+        <div className='w-screen h-[12%] p-[9px] bg-blue-50 fixed top-0 inset-x-0 z-[30] border-b border-t flex flex-row'>
             
             <div className='grow flex flex-row justify-start gap-10 ml-[40px] place-items-center'>
 
