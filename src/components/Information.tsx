@@ -20,8 +20,8 @@ export default function Information({resultRef} : {resultRef: any}) {
             alt="background" fill={true} objectFit='cover' priority/>
             <div className='relative top-[33%] z-20 text-center text-white text-shadow-md 
             px-10 md:px-20'>
-                <h1 data-aos='fade-up' className='text-md text-zinc-100 md:text-xl xl:text-4xl 
-                font-bold mb-8 outline-4 drop-shadow-[0px_0px_20px_rgba(1,1,1,1)]'>
+                <h1 data-aos='fade-up' className='text-md text-neutral-100 md:text-xl xl:text-4xl 
+                font-bold mb-8 outline-4 drop-shadow-[0px_0px_35px_rgba(1,1,1,1)]'>
                     We're here to guide you on your beautiful journey.
                 </h1>
                 {/* <h2 data-aos='fade-up' data-aos-delay='100' 

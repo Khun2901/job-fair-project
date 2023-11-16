@@ -12,10 +12,16 @@ import { BookingItem } from "../../interfaces"
 import { addBookingItem, removeBookingItem } from "@/redux/features/bookSlice"
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
+import { useSession } from "next-auth/react"
+import { revalidateTag } from 'next/cache'
+import { redirect } from 'next/navigation'
+import { dbConnect } from '@/db/dbConnect'
+import Booking from '@/db/models/Booking'
 
 export default function InterviewForm(){
 
     const router = useRouter()
+    const { data: session } = useSession()
 
     const urlParams = useSearchParams()
     const firstNameParam = urlParams.get('firstName')
@@ -61,10 +67,27 @@ export default function InterviewForm(){
         }
     }
 
+    const addBookingToDB = async () => {
+        try {
+            await dbConnect()
+            const booking = await Booking.create(
+                {
+                    'bookingDate': dayjs(interviewDate).format("YYYY/MM/DD"),
+                    'user': session?.user?.name,
+                    'company': company
+                }
+            )
+        } catch (error) {
+            console.log(error)
+        }
+        revalidateTag('bookings')
+        redirect('/interviewcart')
+    }
+
     return(
         <div className='w-auto'>
         
-            <form className='relative p-6 z-20'> 
+            <form className='relative p-6 z-20' action={addBookingToDB}> 
                 <div className='text-center text-3xl font-bold mb-5'>
                     Book Your Interview
                 </div>               

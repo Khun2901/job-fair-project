@@ -21,5 +21,5 @@ const BookingSchema = new mongoose.Schema({
     }
 });
 
-const Booking = mongoose.models.Booking || mongoose.model("Hospital", BookingSchema)
+const Booking = mongoose.models.Booking || mongoose.model("Booking", BookingSchema)
 export default Booking
