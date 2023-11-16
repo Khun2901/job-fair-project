@@ -17,6 +17,8 @@ export const bookSlice = createSlice({
         addBookingItem: (state, action: PayloadAction<BookingItem>) => {
             if(state.bookingItems.length < 3)
             state.bookingItems.push(action.payload)
+            else
+            alert("Booking Limit Reached: 3")
         },
 
         removeBookingItem: (state, action: PayloadAction<BookingItem>) => {

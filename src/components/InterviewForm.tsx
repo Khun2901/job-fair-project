@@ -12,7 +12,6 @@ import { BookingItem } from "../../interfaces"
 import { addBookingItem, removeBookingItem } from "@/redux/features/bookSlice"
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
-import { useAppSelector } from '@/redux/store'
 
 export default function InterviewForm(){
 
@@ -24,13 +23,15 @@ export default function InterviewForm(){
     const companyParam = urlParams.get('company')
     const positionParam = urlParams.get('position')
     const interviewDateParam = urlParams.get('interviewDate')
+    const dateArr = interviewDateParam?.split('/')
+    const interviewDateDayjs = dateArr ? dayjs(`${dateArr[0]}-${dateArr[1]}-${dateArr[2]}`) : null
     const statusParam = urlParams.get('status')
 
     const [firstName, setFirstName] = useState(firstNameParam || '')
     const [lastName, setLastName] = useState(lastNameParam || '')
     const [company, setCompany] = useState(companyParam || 'Agoda')
     const [position, setPosition] = useState(positionParam || 'Full-stack Developer')
-    const [interviewDate, setInterviewDate] = useState<Date | null>(null)
+    const [interviewDate, setInterviewDate] = useState<Date|null>(interviewDateDayjs)
 
     const dispatch = useDispatch<AppDispatch>()
 
@@ -47,7 +48,7 @@ export default function InterviewForm(){
         }
     }
 
-    const changeBooking = () => {
+    const removeOldBooking = () => {
         if(firstNameParam && lastNameParam && companyParam && positionParam && interviewDateParam){
         const item: BookingItem = {
             firstname: firstNameParam,
@@ -56,7 +57,7 @@ export default function InterviewForm(){
             position: positionParam,
             interviewdate: interviewDateParam
         }
-        dispatch(addBookingItem(item))
+        dispatch(removeBookingItem(item))
         }
     }
 
@@ -64,7 +65,6 @@ export default function InterviewForm(){
         <div className='w-auto'>
         
             <form className='relative p-6 z-20'> 
-
                 <div className='text-center text-3xl font-bold mb-5'>
                     Book Your Interview
                 </div>               
@@ -159,7 +159,7 @@ export default function InterviewForm(){
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker 
                                 className='bg-white' 
-                                value={interviewDate}
+                                defaultValue={interviewDate}
                                 onChange={(value)=>setInterviewDate(value)}
                             />
                         </LocalizationProvider>
@@ -174,9 +174,6 @@ export default function InterviewForm(){
                             shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 
                             focus-visible:outline-offset-2 focus-visible:outline-red-500'
                             onClick={() => {
-                                if(statusParam === 'edit'){
-                                    changeBooking();
-                                }
                                 router.push('/interviewcart')
                             }}
                             >
@@ -192,8 +189,11 @@ export default function InterviewForm(){
                             focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
                             onClick={(e) => {
                                 e.preventDefault();
+                                if(statusParam === 'edit') {
+                                    removeOldBooking();
+                                }
                                 makeBooking();
-                                router.push('/interviewcart')
+                                router.push('/interviewcart');
                             }}
                             >
                                 SAVE

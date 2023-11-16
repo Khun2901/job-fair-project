@@ -1,5 +1,6 @@
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import  getUserProfile from '@/libs/getUserProfile'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -8,6 +9,7 @@ import AuthButton from './AuthButton'
 export default async function NavBar() {
 
     const session = await getServerSession(authOptions)
+    const profile = session? await getUserProfile(session.user.token) : null
 
     return(
         <div className='w-screen h-[12%] p-[9px] bg-blue-50 fixed top-0 inset-x-0 z-[30] border-b border-t flex flex-row'>
@@ -30,13 +32,24 @@ export default async function NavBar() {
                     Interview
                 </div></Link>
 
+                {
+                profile?.data.role === 'admin'?
+                <Link href='/admin/manage-booking'><div>
+                    Manage Bookings
+                </div></Link>
+                :
+                null
+                }
+
             </div>
 
             <div className='grow flex flex-row justify-end gap-5 mr-5 h-[100%] place-items-center'>
 
+                {
                 <Link href='/interviewcart' className='mr-5'>
                     <Image src='/bookingcart.png' width={30} height={30} alt='bookingcart'/>
                 </Link>
+                }
                 
                 <div> 
                     {

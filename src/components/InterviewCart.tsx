@@ -4,11 +4,12 @@ import { useDispatch } from "react-redux"
 import { removeBookingItem } from "@/redux/features/bookSlice"
 import Image from 'next/image'
 import { useRouter } from "next/navigation"
+import { useSession } from "next-auth/react"
 
 export default function InterviewCart() {
 
     const router = useRouter()
-
+    const { data: session } = useSession()
     const bookingItems = useAppSelector(state => state.bookSlice.bookingItems)
     const dispatch = useDispatch<AppDispatch>()
 
@@ -22,6 +23,8 @@ export default function InterviewCart() {
                     <div>
                         <div className="text-sm">Interview Date:</div>
                         <div className="text-xl">{bookingItem.interviewdate}</div>
+                        <br></br>
+                        <div className="text-md">User: {session?.user?.name}</div>
                     </div>
 
                     <div className="flex flex-col text-center">
@@ -41,9 +44,7 @@ export default function InterviewCart() {
                         onClick={ (e) => {
                             e.stopPropagation();
                             router.push(`/interview?firstName=${bookingItem.firstname}&lastName=${bookingItem.lastname}&position=${bookingItem.position}&company=${bookingItem.company}&interviewDate=${bookingItem.interviewdate}&status=edit`);
-                            dispatch(removeBookingItem(bookingItem))
                         }}
-
                         >
                         <Image src={'/edit.png'} alt="edit" width={20} height={20}/>
                         </button>
