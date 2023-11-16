@@ -15,10 +15,23 @@ export const bookSlice = createSlice({
     reducers: {
 
         addBookingItem: (state, action: PayloadAction<BookingItem>) => {
-            if(state.bookingItems.length < 3)
-            state.bookingItems.push(action.payload)
-            else
-            alert("Booking Limit Reached: 3")
+            const repeatedItem = state.bookingItems.find((obj) => {
+                return (
+                    obj.firstname === action.payload.firstname &&
+                    obj.lastname === action.payload.lastname &&
+                    obj.company === action.payload.company
+                )
+            })
+
+            if(state.bookingItems.length >= 3) {
+                alert("Booking limit reached: 3")
+            }
+            else if (repeatedItem){
+                alert("You've already booked for this company")
+            }
+            else {
+                state.bookingItems.push(action.payload)
+            }
         },
 
         removeBookingItem: (state, action: PayloadAction<BookingItem>) => {

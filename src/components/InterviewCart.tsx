@@ -1,4 +1,4 @@
-'use client'
+
 import { useAppSelector, AppDispatch } from "@/redux/store"
 import { useDispatch } from "react-redux"
 import { removeBookingItem } from "@/redux/features/bookSlice"
