@@ -68,7 +68,7 @@ export default async function NavBar() {
                     session?
                     null
                     :
-                    <AuthButton title='Register' pageLink='/api/auth/register'/>
+                    <AuthButton title='Register' pageLink='/register'/>
                     }
                 </div>
                 
