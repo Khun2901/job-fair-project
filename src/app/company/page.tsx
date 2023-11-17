@@ -6,7 +6,6 @@ import { LinearProgress } from "@mui/material"
 import { getServerSession } from "next-auth"
 import getUserProfile from "@/libs/getUserProfile"
 import { authOptions } from "../api/auth/[...nextauth]/route"
-import AuthButton from "@/components/AuthButton"
 import IndigoButton from "@/components/IndigoButton"
 
 export default async function CompanyPage() {

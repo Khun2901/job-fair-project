@@ -36,5 +36,5 @@ const CompanySchema = new mongoose.Schema(
     }
 );
 
-const Company = mongoose.models.Company || mongoose.model("Hospital", CompanySchema)
+const Company = mongoose.models.Company || mongoose.model("Company", CompanySchema)
 export default Company

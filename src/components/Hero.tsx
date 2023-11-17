@@ -57,7 +57,7 @@ export default function Hero({resultRef} : {resultRef: any}) {
                     </div>
                 </div>
                 {
-                    session? <div className='z-30 absolute mt-[6%] top-5 right-10 py-2 px-4 font-semibold text-black
+                    session? <div className='z-25 absolute mt-[6%] top-5 right-10 py-2 px-4 font-semibold text-black
                     text-xl rounded-md bg-slate-200 shadow-lg'>
                         Welcome, {session.user?.name}</div>:null
                 }
