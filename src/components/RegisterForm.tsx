@@ -7,11 +7,11 @@ export default async function RegisterForm(){
 
     const registerUser = async (registerUserForm: FormData) => {
         'use server'
-        const userName = registerUserForm.get('hospitalName')
-        const userEmail = registerUserForm.get('address')
-        const userTel = registerUserForm.get('district')
-        const userRole = registerUserForm.get('province')
-        const userPassword = registerUserForm.get('postalCode')
+        const userName = registerUserForm.get('userName')
+        const userEmail = registerUserForm.get('userEmail')
+        const userTel = registerUserForm.get('userTel')
+        const userRole = registerUserForm.get('userRole')
+        const userPassword = registerUserForm.get('userPassword')
 
         try {
             await dbConnect()
@@ -33,7 +33,7 @@ export default async function RegisterForm(){
 
     return (
         <form className='border-neutral-400 border-2 bg-neutral-100 m-4 rounded-lg p-4' action={registerUser}>
-        <div className="text-xl text-blue-700 font-semibold m-5 text-center"> Register New User </div>
+            <div className="text-xl text-blue-700 font-semibold m-5 text-center"> Register New User </div>
             <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-4 flex justify-start">
             
                 <div className="sm:col-span-full">

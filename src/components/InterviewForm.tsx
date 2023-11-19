@@ -67,27 +67,27 @@ export default function InterviewForm(){
         }
     }
 
-    const addBookingToDB = async () => {
-        try {
-            await dbConnect()
-            const booking = await Booking.create(
-                {
-                    'bookingDate': dayjs(interviewDate).format("YYYY/MM/DD"),
-                    'user': session?.user?.name,
-                    'company': company
-                }
-            )
-        } catch (error) {
-            console.log(error)
-        }
-        revalidateTag('bookings')
-        redirect('/interviewcart')
-    }
+    // const addBookingToDB = async () => {
+    //     try {
+    //         await dbConnect()
+    //         const booking = await Booking.create(
+    //             {
+    //                 'bookingDate': dayjs(interviewDate).format("YYYY/MM/DD"),
+    //                 'user': session?.user?.name,
+    //                 'company': company
+    //             }
+    //         )
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    //     revalidateTag('bookings')
+    //     redirect('/interviewcart')
+    // }
 
     return(
         <div className='w-auto'>
         
-            <form className='relative p-6 z-20' action={addBookingToDB}> 
+            <form className='relative p-6 z-20'> 
                 <div className='text-center text-3xl font-bold mb-5'>
                     Book Your Interview
                 </div>               
