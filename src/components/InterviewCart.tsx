@@ -1,12 +1,15 @@
-
 import { useAppSelector, AppDispatch } from "@/redux/store"
 import { useDispatch } from "react-redux"
 import { removeBookingItem } from "@/redux/features/bookSlice"
 import Image from 'next/image'
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
+import { useModel } from "@/hooks/useModel"
+import DeleteConfirmation from "@/components/modal/DeleteConfirmation"
 
 export default function InterviewCart() {
+
+    const [isOpen,onOpen,onClose] = useModel()
 
     const router = useRouter()
     const { data: session } = useSession()
@@ -15,8 +18,11 @@ export default function InterviewCart() {
 
     return (
         <>
+        <DeleteConfirmation isOpen={isOpen} onClose={onClose}></DeleteConfirmation>
         {
+            
             bookingItems.map((bookingItem) => (
+                
                 <div className="bg-slate-200 rounded-lg flex flex-row justify-between p-4 my-4 shadow-md"
                 key = {bookingItem.firstname && bookingItem.lastname && bookingItem.company}>
 
@@ -49,12 +55,14 @@ export default function InterviewCart() {
                         <Image src={'/edit.png'} alt="edit" width={20} height={20}/>
                         </button>
                         
-
+                        
                         <button type='submit'
                         className='rounded-md bg-red-400 m-1 p-2 text-sm border-2 border-red-400 
                         font-semibold text-white shadow-sm hover:bg-white focus-visible:outline 
                         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600'
-                        onClick={ () => dispatch(removeBookingItem(bookingItem))}>
+                        // onClick={ () => dispatch(removeBookingItem(bookingItem))}
+                        onClick={onOpen}
+                        >
                         <Image src={'/delete.png'} alt="delete" width={20} height={20}/>
                         </button>
                     </div>
