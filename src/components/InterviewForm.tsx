@@ -13,10 +13,8 @@ import { addBookingItem, removeBookingItem } from "@/redux/features/bookSlice"
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import { useSession } from "next-auth/react"
-import { revalidateTag } from 'next/cache'
-import { redirect } from 'next/navigation'
-import { dbConnect } from '@/db/dbConnect'
-import Booking from '@/db/models/Booking'
+import { addInterviewToMongo } from "@/components/AddInterviewToDB"
+
 
 export default function InterviewForm(){
 
@@ -67,27 +65,10 @@ export default function InterviewForm(){
         }
     }
 
-    // const addBookingToDB = async () => {
-    //     try {
-    //         await dbConnect()
-    //         const booking = await Booking.create(
-    //             {
-    //                 'bookingDate': dayjs(interviewDate).format("YYYY/MM/DD"),
-    //                 'user': session?.user?.name,
-    //                 'company': company
-    //             }
-    //         )
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    //     revalidateTag('bookings')
-    //     redirect('/interviewcart')
-    // }
-
     return(
         <div className='w-auto'>
         
-            <form className='relative p-6 z-20'> 
+            <form className='relative p-6 z-20' action={addInterviewToMongo}>
                 <div className='text-center text-3xl font-bold mb-5'>
                     Book Your Interview
                 </div>               
@@ -151,7 +132,6 @@ export default function InterviewForm(){
                             </Select>
                         </div>
                     </div>
-
                     <div className='sm:col-span-1'>
                         <label className='block text-lg font-semibold leading-6 text-gray-900 ml-2 mb-2'>
                             Desired Position
@@ -175,17 +155,21 @@ export default function InterviewForm(){
                         </div>
                     </div>
 
-                    <div className='sm:col-span-full'>
+                    <div className='sm:col-span-1' id='date'>
                         <label className='block text-lg font-semibold leading-6 text-gray-900 ml-2 mb-2'>
                             Interview Date
                         </label>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker 
+                            <DatePicker
                                 className='bg-white' 
                                 defaultValue={interviewDate}
-                                onChange={(value)=>setInterviewDate(value)}
+                                onChange={(value)=>{setInterviewDate(value)}}
                             />
                         </LocalizationProvider>
+                    </div>
+                    
+                    <div className='sm:col-span-1' id='user'>
+                        {session?.user?.name}
                     </div>
 
                     <div className='sm:col-span-full flex justify-end gap-5 mr-5'>

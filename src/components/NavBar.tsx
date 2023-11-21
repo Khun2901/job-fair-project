@@ -1,7 +1,6 @@
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import  getUserProfile from '@/libs/getUserProfile'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import AuthButton from './AuthButton'
@@ -16,25 +15,25 @@ export default async function NavBar() {
             
             <div className='grow flex flex-row justify-start gap-10 ml-[40px] place-items-center'>
 
-                <Link href='/'><div>
-                    Logo
-                </div></Link>
+                <Link href='/'>
+                    <Image src='/logo.png' width={50} height={50} alt='logo'/>
+                </Link>
 
-                <Link href='/'><div>
+                <Link href='/'><div className='hover:font-semibold hover:underline'>
                     Home
                 </div></Link>
 
-                <Link href='/company'><div>
+                <Link href='/company'><div className='hover:font-semibold hover:underline'>
                     Company
                 </div></Link>
 
-                <Link href='/interview'><div>
+                <Link href='/interview'><div className='hover:font-semibold hover:underline'>
                     Interview
                 </div></Link>
 
                 {
                 profile?.data.role === 'admin'?
-                <Link href='/admin/manage-booking'><div>
+                <Link href='/admin/manage-booking'><div className='hover:font-semibold hover:underline'>
                     Manage Bookings
                 </div></Link>
                 :
