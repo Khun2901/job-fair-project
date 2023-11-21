@@ -1,3 +1,4 @@
+'use client'
 import { useAppSelector, AppDispatch } from "@/redux/store"
 import { useDispatch } from "react-redux"
 import { removeBookingItem } from "@/redux/features/bookSlice"
@@ -6,6 +7,8 @@ import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
 import { useModel } from "@/hooks/useModel"
 import DeleteConfirmation from "@/components/modal/DeleteConfirmation"
+import { useState } from "react"
+import { BookingItem } from "../../interfaces"
 
 export default function InterviewCart() {
 
@@ -15,10 +18,24 @@ export default function InterviewCart() {
     const { data: session } = useSession()
     const bookingItems = useAppSelector(state => state.bookSlice.bookingItems)
     const dispatch = useDispatch<AppDispatch>()
+    const [selectedItem, setSelectedItem] = useState<BookingItem | null>(null);
 
+    const handleOpenConfirmation = (bookingItem: BookingItem) => {
+        onOpen();
+        setSelectedItem(bookingItem);   
+    };
+
+    const handleConfirmDelete = () => {
+        if (selectedItem) {
+            dispatch(removeBookingItem(selectedItem));
+            setSelectedItem(null);
+            onClose;
+        }
+    };
+    
     return (
         <>
-        <DeleteConfirmation isOpen={isOpen} onClose={onClose}></DeleteConfirmation>
+        <DeleteConfirmation isOpen={isOpen} onClose={onClose} onConfirmDelete={handleConfirmDelete}></DeleteConfirmation>
         {
             
             bookingItems.map((bookingItem) => (
@@ -61,7 +78,7 @@ export default function InterviewCart() {
                         font-semibold text-white shadow-sm hover:bg-white focus-visible:outline 
                         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600'
                         // onClick={ () => dispatch(removeBookingItem(bookingItem))}
-                        onClick={onOpen}
+                        onClick={() => {handleOpenConfirmation(bookingItem)}}
                         >
                         <Image src={'/delete.png'} alt="delete" width={20} height={20}/>
                         </button>

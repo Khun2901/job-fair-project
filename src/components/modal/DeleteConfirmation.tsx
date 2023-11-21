@@ -1,12 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { FC, FormEventHandler, FormHTMLAttributes, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import BackDrop from "./BackDrop";
 import Portal from "./Portal";
-import { AnyAction } from "redux";
 
-export default function ETCModal({children, isOpen, onClose, disableBGClose}: 
-  {children?: React.ReactNode, isOpen: boolean, onClose: ()=>void, disableBGClose?: boolean}){
+export default function DeleteConfirmation({children, isOpen, onClose, onConfirmDelete, disableBGClose}: 
+  {children?: React.ReactNode, isOpen: boolean, onClose: ()=>void, onConfirmDelete: ()=>void, disableBGClose?: boolean}){
   
   return (
     <Portal>
@@ -34,7 +32,10 @@ export default function ETCModal({children, isOpen, onClose, disableBGClose}:
                 <button className='w-auto text-white bg-[#FF3333] border-[#FF3333]
                     font-semibold text-[18px] py-1 px-10 rounded-lg border-2 
                     hover:bg-white hover:text-[#FF3333]'
-                    onClick={onClose}
+                    onClick={() => {
+                      onConfirmDelete(); // Call the onConfirmDelete prop to trigger deletion
+                      onClose(); // Close the modal
+                    }}
                     >
                     Delete
                 </button>
