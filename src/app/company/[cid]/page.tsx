@@ -8,10 +8,14 @@ import DeleteCompanyButton from "@/components/DeleteCompanyButton"
 
 export default async function CompanyDetailPage({params}: {params: {cid: string}}) {
     
-    let isLogin = true
     const session = await getServerSession(authOptions)
-    if(!session || !session.user.token)
-        isLogin = false
+    if(!session || !session.user.token) {
+        return (
+            <div className="mt-[100px]">Please login first.</div>
+        )
+    }
+    
+    const profile = await getUserProfile(session.user.token)
 
     const companyDetail = await getCompany(params.cid)
 
@@ -31,22 +35,24 @@ export default async function CompanyDetailPage({params}: {params: {cid: string}
                         <div className="my-4">Province: {companyDetail.data.province}</div>
                         <div className="my-4">Postal Code: {companyDetail.data.postalcode}</div>
                         <div className="my-4">Tel: {companyDetail.data.tel}</div>
-                        { isLogin ? 
+                        <div className="flex flex-row">
                             <Link href={`/interview?cid=${params.cid}&company=${companyDetail.data.name}`}>
-                                <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 text-white shadow-sm">
+                                <button className="block rounded-md bg-indigo-600 hover:bg-indigo-800 px-3 py-2 text-white shadow-sm">
                                     Booking your Interview
                                 </button>
-                            </Link> :null
-                        }
-                        <Link href={`/admin/company-managing?cid=${params.cid}`}>
-                            <button className='rounded-md bg-neutral-300 m-1 p-2 text-sm border-2 border-neutral-300 
-                                font-semibold text-white shadow-sm hover:bg-neutral-100 focus-visible:outline
-                                focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-100'
-                                >
-                                <Image src={'/edit.png'} alt="edit" width={20} height={20}/>
-                            </button>
-                        </Link>
-                        <DeleteCompanyButton cid={params.cid} />
+                            </Link>
+                            {profile.data.role == 'admin' ? 
+                            <Link href={`/admin/company-managing?cid=${params.cid}`}>
+                                <button className='rounded-md bg-neutral-300 my-1 mx-4 p-2 text-sm border-2 border-neutral-300 
+                                    font-semibold text-white shadow-sm hover:bg-neutral-100 focus-visible:outline
+                                    focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-100'
+                                    >
+                                    <Image src={'/edit.png'} alt="edit" width={20} height={20}/>
+                                </button>
+                            </Link> :null}
+                            {profile.data.role == 'admin' ? 
+                            <DeleteCompanyButton cid={params.cid} /> :null}
+                        </div>
                         
                     </div>
                     

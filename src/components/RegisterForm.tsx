@@ -77,10 +77,11 @@ export default async function RegisterForm(){
                         Role
                     </label>
                     <input 
-                        required
+                        readOnly
                         type="text" 
                         name='userRole' 
                         id='userRole'
+                        value='user'
                         placeholder="Role"
                         className="block w-full px-2 rounded-md border-0 py-1.5 text-gray-900 
                         shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 
