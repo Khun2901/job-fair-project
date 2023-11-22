@@ -9,6 +9,7 @@ import { useModel } from "@/hooks/useModel"
 import DeleteConfirmation from "@/components/modal/DeleteConfirmation"
 import { useState } from "react"
 import { BookingItem } from "../../interfaces"
+import deleteBooking from "@/libs/deleteBooking"
 
 export default function InterviewCart() {
 
