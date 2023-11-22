@@ -37,6 +37,14 @@ export default async function CompanyDetailPage({params}: {params: {cid: string}
                                 </button>
                             </Link> :null
                         }
+                        <Link href={`/admin/company-managing?cid=${params.cid}`}>
+                            <button className='rounded-md bg-neutral-300 m-1 p-2 text-sm border-2 border-neutral-300 
+                                font-semibold text-white shadow-sm hover:bg-neutral-100 focus-visible:outline
+                                focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-100'
+                                >
+                                <Image src={'/edit.png'} alt="edit" width={20} height={20}/>
+                            </button>
+                        </Link>
                         
                     </div>
                     

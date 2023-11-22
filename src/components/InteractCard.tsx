@@ -1,7 +1,11 @@
 'use client';
 import React from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function InteractCard({children}: { children: React.ReactNode}) {
+
+    const router = useRouter()
 
     function OnHover(event: React.SyntheticEvent) {
         if(event.type == 'mouseover'){

@@ -1,57 +1,27 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
-import getUserProfile from "@/libs/getUserProfile"
-import { getServerSession } from "next-auth"
-import Company from "@/db/models/Company"
-import { dbConnect } from "@/db/dbConnect"
-import { revalidateTag } from "next/cache"
-import { redirect } from "next/navigation"
+import putCompany from "@/libs/putCompany"
+import { useSearchParams } from "next/navigation"
 
-export default async function AddCompanyForm() {
+export default async function ManageCompanyForm({cid}: {cid:string}) {
 
-    const session = await getServerSession(authOptions)
-    if(!session || !session.user.token) return (
-        <div className="mt-[100px]">Please login as Admin.</div>
-    )
+    const urlParams = useSearchParams()
 
-    const profile = await getUserProfile(session.user.token)
-    if(profile.data.role !== "admin") return (
-        <div className="mt-[100px]">Please login as Admin.</div>
-    )
-    var createdAt = new Date(profile.data.createdAt)
+    const updateCompany = async (updateCompanyForm: FormData) => {
+        const name = updateCompanyForm.get("name")?.toString()
+        const business = updateCompanyForm.get("business")?.toString()
+        const address = updateCompanyForm.get("address")?.toString()
+        const province = updateCompanyForm.get("province")?.toString()
+        const postalcode = updateCompanyForm.get("postalcode")?.toString()
+        const tel = updateCompanyForm.get("tel")?.toString()
+        const picture = updateCompanyForm.get("picture")?.toString()
 
-    const addCompany = async (addCompanyForm: FormData) => {
-        "use server"
-        const name = addCompanyForm.get("name")
-        const business = addCompanyForm.get("business")
-        const address = addCompanyForm.get("address")
-        const province = addCompanyForm.get("province")
-        const postalcode = addCompanyForm.get("postalcode")
-        const tel = addCompanyForm.get("tel")
-        const picture = addCompanyForm.get("picture")
+        putCompany(cid, name, business, address, province, postalcode, tel, picture)
 
-        try {
-            await dbConnect()
-            const company = await Company.create({
-                "name": name,
-                "business": business,
-                "address": address,
-                "province": province,
-                "postalcode": postalcode,
-                "tel": tel,
-                "picture": picture
-            })
-        } catch(error) {
-            console.log(error)
-        }
-        revalidateTag("companies")
-        redirect("/company")
     }
-
 
     return(
         <div className="flex flex-col mt-[100px] items-center">
-            <h1 className="text-xl text-center my-4 font-bold">Add New Company</h1>
-            <form action={addCompany} className="bg-slate-100 rounded-md w-[100%]">
+            <h1 className="text-xl text-center my-4 font-bold">Update Company</h1>
+            <form action={updateCompany} className="bg-slate-100 rounded-md w-[100%]">
                 <div className="flex items-center w-auto my-2 mx-4">
                     <label className="block text-gray-700 pr-4 font-medium" htmlFor="name">Name:</label>
                     <input type="text" required id="name" name="name" placeholder="Company Name"
@@ -96,7 +66,7 @@ export default async function AddCompanyForm() {
                 </div>
 
                 <button type="submit" className="bg-indigo-600 hover:bg-indigo-800 text-white font-semibold p-2 rounded my-4">
-                Add New Company</button>
+                Update New Company</button>
 
             </form>
         </div>

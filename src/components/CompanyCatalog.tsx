@@ -1,5 +1,6 @@
 import Link from "next/link"
 import CompanyCard from "./CompanyCard"
+import Image from "next/image"
 
 export default async function CompanyCatalog({companyJson}: {companyJson: Object}) {
     const companyJsonReady = await companyJson
@@ -10,7 +11,7 @@ export default async function CompanyCatalog({companyJson}: {companyJson: Object
                     companyJsonReady.data.map((companyItem: Object)=>(
                         <Link href={`/company/${companyItem.id}`}>
                         <CompanyCard companyName={companyItem.name} imgSrc={companyItem.picture}
-                        /> 
+                        />
                         </Link>  
                         ) 
                     )

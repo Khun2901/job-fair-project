@@ -15,14 +15,13 @@ export default async function postBooking(cid: string|null, interviewDate: strin
 
         method: "POST",
         headers: {
-            authorization: `Bearer ${session.user.token}`,
+            "accept": "application/json",
+            "authorization": `Bearer ${session.user.token}`,
             "Content-Type": "application/json",
 
         },
         body: JSON.stringify({
-            bookingDate: interviewDate,
-            user: session.user._id,
-            company: cid
+            bookingDate: interviewDate
         })
     })
 
