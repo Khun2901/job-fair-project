@@ -1,3 +1,4 @@
+'use server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 export default async function updateBooking(id: string|null, interviewDate: string|null) {
@@ -7,9 +8,8 @@ export default async function updateBooking(id: string|null, interviewDate: stri
 
         method: "PUT",
         headers: {
-            "accept": "application/json",
-            "authorization": `Bearer ${session?.user.token}`,
-            "Content-Type": "application/json",
+            "accept": "*/*",
+            "authorization": `Bearer ${session?.user.token}`
         },
         body: JSON.stringify({
             'id': id,

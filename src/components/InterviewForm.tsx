@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation'
 import { useSession } from "next-auth/react"
 import postBooking from '@/libs/postBooking'
 import { FormControl } from '@mui/material';
+import updateBooking from '@/libs/updateBooking'
 
 export default function InterviewForm(){
 
@@ -30,6 +31,7 @@ export default function InterviewForm(){
     const dateArr = interviewDateParam?.split('-') // YYYY-DD-MM
     const interviewDateDayjs = dateArr ? dayjs(`${dateArr[0]}-${dateArr[2]}-${dateArr[1]}`) : null
     const statusParam = urlParams.get('status')
+    const bid = urlParams.get('booking_id')
 
     const [name, setName] = useState(nameParam || '')
     const [company, setCompany] = useState(companyParam || 'Agoda')
@@ -154,16 +156,22 @@ export default function InterviewForm(){
                                 e.preventDefault();
                                 if(statusParam === 'edit') {
                                     removeOldBooking();
+                                    makeBooking();
+                                    console.log(dayjs(interviewDate).format("YYYY-MM-DD"));
+                                    postBooking("655e4a3505e9f05ceecc1094", dayjs(interviewDate).format("YYYY-MM-DD"));
+                                    router.push('/interviewcart');
                                 }
-                                makeBooking();
-<<<<<<< HEAD
-                                console.log(dayjs(interviewDate).format("YYYY-MM-DD"));
-                                postBooking("655e4ac905e9f05ceecc1097", dayjs(interviewDate).format("YYYY-MM-DD"));
-=======
-                                //console.log(dayjs(interviewDate).format("YYYY-MM-DD"));
-                                postBooking(companyId, dayjs(interviewDate).format("YYYY-MM-DD"));
->>>>>>> e41bbfa09db6fd56f251fe50654880fdc5a5fe96
-                                router.push('/interviewcart');
+                                else if(statusParam === 'adminedit') {
+                                    updateBooking(bid, dayjs(interviewDate).format("YYYY-MM-DD"));
+                                    router.push('/managecart');
+                                }
+                                else{
+                                    makeBooking();
+                                    console.log(dayjs(interviewDate).format("YYYY-MM-DD"));
+                                    postBooking("655e4a3505e9f05ceecc1094", dayjs(interviewDate).format("YYYY-MM-DD"));
+                                    router.push('/interviewcart');
+                                }
+                                
                             }}
                             >
                                 SAVE

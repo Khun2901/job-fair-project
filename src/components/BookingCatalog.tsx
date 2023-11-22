@@ -2,13 +2,14 @@
 import deleteBooking from "@/libs/deleteBooking";
 import dayjs from "dayjs";
 import Image from "next/image"
+import Link from "next/link";
 
 export default async function BookingCatalog({bookingJson}: {bookingJson: Object}) {
+
     const bookingJsonReady = await bookingJson
 
     return (
         <div className="mt-12">
-        
         {
             bookingJsonReady.data.map((bookingItem: Object)=>(
                 
@@ -26,14 +27,15 @@ export default async function BookingCatalog({bookingJson}: {bookingJson: Object
 
                     <div className="flex flex-row">
                         
+                        <Link href={`/interview?name=${bookingItem.user.name}&company=${bookingItem.company.name}&interviewDate=${dayjs(bookingItem.bookingDate).format('YYYY-DD-MM')}&booking_id=${bookingItem._id}&status=adminedit`}>
                         <button type='submit'
-                        className='rounded-md bg-neutral-300 m-1 py-6 px-4 text-sm border-2 border-neutral-300 
+                        className='rounded-md bg-neutral-300 m-1 py-6 px-4 text-sm border-2 border-neutral-300
                         font-semibold text-white shadow-sm hover:bg-neutral-100 focus-visible:outline
                         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-100'
-                        
                         >
                         <Image src={'/edit.png'} alt="edit" width={20} height={20}/>
                         </button>
+                        </Link>
                         
                         <button type='submit'
                         className='rounded-md bg-red-400 m-1 py-6 px-4 text-sm border-2 border-red-400 
