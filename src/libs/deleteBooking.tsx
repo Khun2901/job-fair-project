@@ -1,5 +1,6 @@
 'use server'
-
+import { revalidateTag } from 'next/cache'
+import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 export default async function deleteBooking(id: string|null) {
@@ -17,12 +18,12 @@ export default async function deleteBooking(id: string|null) {
         body: JSON.stringify({
             "id": id
         })
+        
     })
 
     if(!response.ok){
         throw new Error("Failed to delete booking data.")
     }
-
     return await response.json()
 
 }

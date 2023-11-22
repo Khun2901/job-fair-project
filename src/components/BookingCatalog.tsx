@@ -39,7 +39,7 @@ export default async function BookingCatalog({bookingJson}: {bookingJson: Object
                         className='rounded-md bg-red-400 m-1 py-6 px-4 text-sm border-2 border-red-400 
                         font-semibold text-white shadow-sm hover:bg-white focus-visible:outline 
                         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600'
-                        onClick={ (e) => {e.stopPropagation(), deleteBooking(bookingItem.id)}}>
+                        onClick={ (e) => {e.stopPropagation(), deleteBooking(bookingItem._id)}}>
                         <Image src={'/delete.png'} alt="delete" width={20} height={20}/>
                         </button>
                     </div>
