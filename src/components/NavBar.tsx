@@ -27,13 +27,10 @@ export default async function NavBar() {
                     Company
                 </div></Link>
 
-                { profile?.data.role == 'user'?
                 <Link href='/interview'><div className='hover:font-semibold hover:underline'>
                     Interview
                 </div></Link>
-                :
-                null
-                }
+                
 
             </div>
 
@@ -45,10 +42,13 @@ export default async function NavBar() {
                     <Image src='/manage.png' width={30} height={30} alt='managecart'/>
                 </Link>
                 :
+                null
+                }
+                
                 <Link href='/interviewcart' className='mr-5'>
                     <Image src='/bookingcart.png' width={30} height={30} alt='bookingcart'/>
                 </Link>
-                }
+                
                 
                 <div> 
                     {

@@ -5,8 +5,10 @@ import Image from "next/image"
 
 export default async function BookingCatalog({bookingJson}: {bookingJson: Object}) {
     const bookingJsonReady = await bookingJson
+
     return (
         <div className="mt-12">
+        
         {
             bookingJsonReady.data.map((bookingItem: Object)=>(
                 
@@ -28,9 +30,7 @@ export default async function BookingCatalog({bookingJson}: {bookingJson: Object
                         className='rounded-md bg-neutral-300 m-1 py-6 px-4 text-sm border-2 border-neutral-300 
                         font-semibold text-white shadow-sm hover:bg-neutral-100 focus-visible:outline
                         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-100'
-                        onClick={ (e) => {
-                            e.stopPropagation();
-                        }}
+                        
                         >
                         <Image src={'/edit.png'} alt="edit" width={20} height={20}/>
                         </button>
@@ -39,7 +39,7 @@ export default async function BookingCatalog({bookingJson}: {bookingJson: Object
                         className='rounded-md bg-red-400 m-1 py-6 px-4 text-sm border-2 border-red-400 
                         font-semibold text-white shadow-sm hover:bg-white focus-visible:outline 
                         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600'
-                        onClick={ (e) => {e.stopPropagation(), deleteBooking(bookingItem._id)}}>
+                        onClick={ (e) => {e.stopPropagation(), deleteBooking(bookingItem.id)}}>
                         <Image src={'/delete.png'} alt="delete" width={20} height={20}/>
                         </button>
                     </div>
