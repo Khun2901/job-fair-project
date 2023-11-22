@@ -26,7 +26,7 @@ export default async function CompanyDetailPage({params}: {params: {cid: string}
                 <div>
                     <h1 className="text-2xl font-bold mx-20 my-4">{companyDetail.data.name}</h1>
                     <div className="text-xl text-left font-normal mx-20">
-                        <div className="my-4">Business: {companyDetail.data.address}</div>
+                        <div className="my-4">Business: {companyDetail.data.business}</div>
                         <div className="my-4">Address: {companyDetail.data.address}</div>
                         <div className="my-4">Province: {companyDetail.data.province}</div>
                         <div className="my-4">Postal Code: {companyDetail.data.postalcode}</div>

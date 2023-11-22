@@ -10,10 +10,13 @@ export default async function deleteBooking(id: string|null) {
 
         method: "DELETE",
         headers: {
-            'accept': '*/*',
+            'accept': 'application/json',
             "Authorization": `Bearer ${session?.user.token}`,
             "Content-Type": "application/json",
-        }
+        },
+        body: JSON.stringify({
+            "id": id
+        })
     })
 
     if(!response.ok){

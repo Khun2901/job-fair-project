@@ -2,7 +2,7 @@
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
-export default async function deleteCompany(cid: string|null) {
+export default async function putCompany(cid: string|null) {
 
     const session = await getServerSession(authOptions)
     if(!session || !session.user.token) {
