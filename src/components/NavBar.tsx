@@ -27,16 +27,20 @@ export default async function NavBar() {
                     Company
                 </div></Link>
 
+                { profile?.data.role == 'user'?
                 <Link href='/interview'><div className='hover:font-semibold hover:underline'>
                     Interview
                 </div></Link>
+                :
+                null
+                }
 
             </div>
 
             <div className='grow flex flex-row justify-end gap-5 mr-5 h-[100%] place-items-center'>
 
                 {
-                profile.data.role == 'admin'?
+                profile?.data.role == 'admin'?
                 <Link href='/managecart' className='mr-5'>
                     <Image src='/manage.png' width={30} height={30} alt='managecart'/>
                 </Link>

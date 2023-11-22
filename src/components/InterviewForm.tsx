@@ -14,7 +14,7 @@ import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import { useSession } from "next-auth/react"
 import postBooking from '@/libs/postBooking'
-import { FormControl } from '@mui/material';
+import getCompanies from '@/libs/getCompanies'
 
 export default function InterviewForm(){
 
@@ -46,7 +46,6 @@ export default function InterviewForm(){
         dispatch(addBookingItem(item))
         }
     }
-
     const removeOldBooking = () => {
         if(nameParam && companyParam && interviewDateParam){
         const item: BookingItem = {
