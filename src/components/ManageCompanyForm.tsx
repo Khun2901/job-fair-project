@@ -1,7 +1,8 @@
 import putCompany from "@/libs/putCompany"
 import { useSearchParams } from "next/navigation"
+import Link from "next/link"
 
-export default async function ManageCompanyForm({cid}: {cid:string}) {
+export default async function ManageCompanyForm({cid}: {cid:string|null}) {
 
     const urlParams = useSearchParams()
 
@@ -19,7 +20,7 @@ export default async function ManageCompanyForm({cid}: {cid:string}) {
     }
 
     return(
-        <div className="flex flex-col mt-[100px] items-center">
+        <div className="flex flex-col w-[50%] mt-[100px] items-center">
             <h1 className="text-xl text-center my-4 font-bold">Update Company</h1>
             <form action={updateCompany} className="bg-slate-100 rounded-md w-[100%]">
                 <div className="flex items-center w-auto my-2 mx-4">
@@ -65,8 +66,10 @@ export default async function ManageCompanyForm({cid}: {cid:string}) {
                     focus:outline-none focus:border-indigo-600" />
                 </div>
 
-                <button type="submit" className="bg-indigo-600 hover:bg-indigo-800 text-white font-semibold p-2 rounded my-4">
-                Update New Company</button>
+                <div className="text-center my-2">
+                    <button type="submit" className="bg-indigo-600 hover:bg-indigo-800 text-white font-semibold p-2 rounded my-4">
+                    Update Company</button>
+                </div>
 
             </form>
         </div>

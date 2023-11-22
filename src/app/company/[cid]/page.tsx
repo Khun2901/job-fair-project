@@ -4,6 +4,7 @@ import Link from "next/link"
 import { getServerSession } from "next-auth"
 import getUserProfile from "@/libs/getUserProfile"
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import DeleteCompanyButton from "@/components/DeleteCompanyButton"
 
 export default async function CompanyDetailPage({params}: {params: {cid: string}}) {
     
@@ -45,6 +46,7 @@ export default async function CompanyDetailPage({params}: {params: {cid: string}
                                 <Image src={'/edit.png'} alt="edit" width={20} height={20}/>
                             </button>
                         </Link>
+                        <DeleteCompanyButton cid={params.cid} />
                         
                     </div>
                     

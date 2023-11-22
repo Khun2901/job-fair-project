@@ -11,7 +11,7 @@ export default function ManagingCompanyPage() {
     const cid = urlParams.get('cid')
 
     return (
-        <div>
+        <div className="w-full flex flex-col items-center">
             <ManageCompanyForm cid={cid}/>
         </div>
     )

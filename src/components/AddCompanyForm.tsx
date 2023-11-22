@@ -47,9 +47,8 @@ export default async function AddCompanyForm() {
         redirect("/company")
     }
 
-
     return(
-        <div className="flex flex-col mt-[100px] items-center">
+        <div className="flex flex-col w-[50%] mt-[100px] items-center">
             <h1 className="text-xl text-center my-4 font-bold">Add New Company</h1>
             <form action={addCompany} className="bg-slate-100 rounded-md w-[100%]">
                 <div className="flex items-center w-auto my-2 mx-4">
@@ -94,9 +93,11 @@ export default async function AddCompanyForm() {
                     className="bg-white border-2 border-gray-200 rounded w-full p-2 text-gray-700
                     focus:outline-none focus:border-indigo-600" />
                 </div>
-
-                <button type="submit" className="bg-indigo-600 hover:bg-indigo-800 text-white font-semibold p-2 rounded my-4">
-                Add New Company</button>
+                <div className="text-center my-2">
+                    <button type="submit" className="bg-indigo-600 hover:bg-indigo-800 text-white font-semibold p-2 rounded my-4">
+                    Add New Company</button>
+                </div>
+                
 
             </form>
         </div>
