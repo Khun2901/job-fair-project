@@ -2,31 +2,19 @@ import User from '@/db/models/User'
 import { dbConnect } from '@/db/dbConnect'
 import { revalidateTag } from 'next/cache'
 import { redirect } from 'next/navigation'
+import userRegister from '@/libs/userRegister'
 
 export default async function RegisterForm(){
 
     const registerUser = async (registerUserForm: FormData) => {
         'use server'
-        const userName = registerUserForm.get('userName')
-        const userEmail = registerUserForm.get('userEmail')
-        const userTel = registerUserForm.get('userTel')
-        const userRole = registerUserForm.get('userRole')
-        const userPassword = registerUserForm.get('userPassword')
-
-        try {
-            await dbConnect()
-            const user = await User.create(
-                {
-                    'name': userName,
-                    'email': userEmail,
-                    'tel': userTel,
-                    'role': userRole,
-                    'password': userPassword
-                }
-            )
-        } catch (error) {
-            console.log(error)
-        }
+        userRegister(
+            registerUserForm.get('userName') as string,
+            registerUserForm.get('userEmail') as string,
+            registerUserForm.get('userTel') as string,
+            registerUserForm.get('userRole') as string,
+            registerUserForm.get('userPassword') as string
+        )
         revalidateTag('user')
         redirect('/api/auth/signin')
     }
