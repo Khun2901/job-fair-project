@@ -13,7 +13,7 @@ import { addBookingItem, removeBookingItem } from "@/redux/features/bookSlice"
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import { useSession } from "next-auth/react"
-import addInterviewToMongo from './AddInterviewToDB'
+import postBooking from '@/libs/postBooking'
 
 
 export default function InterviewForm(){
@@ -23,18 +23,15 @@ export default function InterviewForm(){
 
     const urlParams = useSearchParams()
     const nameParam = urlParams.get('name')
-    const lastNameParam = urlParams.get('lastName')
     const companyParam = urlParams.get('company')
     const cid = urlParams.get('cid')
-    const positionParam = urlParams.get('position')
     const interviewDateParam = urlParams.get('interviewDate')
-    const dateArr = interviewDateParam?.split('/')
-    const interviewDateDayjs = dateArr ? dayjs(`${dateArr[0]}-${dateArr[1]}-${dateArr[2]}`) : null
+    const dateArr = interviewDateParam?.split('-') // YYYY-DD-MM
+    const interviewDateDayjs = dateArr ? dayjs(`${dateArr[0]}-${dateArr[2]}-${dateArr[1]}`) : null
     const statusParam = urlParams.get('status')
 
     const [name, setName] = useState(nameParam || '')
     const [company, setCompany] = useState(companyParam || 'Agoda')
-    const [position, setPosition] = useState(positionParam || 'Full-stack Developer')
     const [interviewDate, setInterviewDate] = useState<Date|null>(interviewDateDayjs)
 
     const dispatch = useDispatch<AppDispatch>()
@@ -79,8 +76,8 @@ export default function InterviewForm(){
                             required
                             minLength={4}
                             type='text'
-                            name='first-name' 
-                            id='first-name'
+                            name='name' 
+                            id='name'
                             className='block w-full px-2 rounded-md border-[1px] border-neutral-400 py-1.5 
                             text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 
                             focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6
@@ -103,7 +100,7 @@ export default function InterviewForm(){
                                 value={company}
                                 onChange={(e)=>setCompany(e.target.value)}
                             >
-                                <MenuItem value='Agoda'>Agoda</MenuItem>
+                                <MenuItem value='Agoda' id="6544d52216ce3493911112fd">Agoda</MenuItem>
                                 <MenuItem value='booking.com'>booking.com</MenuItem>
                                 <MenuItem value='CLEVERSE'>CLEVERSE</MenuItem>
                                 <MenuItem value='Dell'>Dell</MenuItem>
@@ -158,7 +155,7 @@ export default function InterviewForm(){
                                 }
                                 makeBooking();
                                 console.log(dayjs(interviewDate).format("YYYY-MM-DD"));
-                                addInterviewToMongo(cid, dayjs(interviewDate).format("YYYY-MM-DD"));
+                                postBooking("6544d52216ce3493911112fd", dayjs(interviewDate).format("YYYY-MM-DD"));
                                 router.push('/interviewcart');
                             }}
                             >

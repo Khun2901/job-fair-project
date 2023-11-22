@@ -33,7 +33,7 @@ export default async function NavBar() {
 
                 {
                 profile?.data.role === 'admin'?
-                <Link href='/admin/manage-booking'><div className='hover:font-semibold hover:underline'>
+                <Link href='/manage-booking'><div className='hover:font-semibold hover:underline'>
                     Manage Bookings
                 </div></Link>
                 :

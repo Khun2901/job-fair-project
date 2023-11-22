@@ -50,7 +50,7 @@ export default function InterviewCart() {
                         <div className="text-md">User: {session?.user?.name}</div>
                     </div>
 
-                    <div className="flex flex-col text-center">
+                    <div className="flex flex-col text-center p-3">
                         <div className="text-sm">Booking for:</div>
                         <div className="text-xl">{bookingItem.name}</div>
                         <div className="text-md">Company: {bookingItem.company}</div>
@@ -65,7 +65,7 @@ export default function InterviewCart() {
                         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-100'
                         onClick={ (e) => {
                             e.stopPropagation();
-                            router.push(`/interview?firstName=${bookingItem.name}&company=${bookingItem.company}&interviewDate=${bookingItem.interviewdate}&status=edit`);
+                            router.push(`/interview?name=${bookingItem.name}&company=${bookingItem.company}&interviewDate=${bookingItem.interviewdate}&status=edit`);
                         }}
                         >
                         <Image src={'/edit.png'} alt="edit" width={20} height={20}/>
