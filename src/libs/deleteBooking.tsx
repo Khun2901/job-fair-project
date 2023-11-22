@@ -1,3 +1,5 @@
+'use server'
+
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 export default async function deleteBooking(id: string|null) {
@@ -8,13 +10,9 @@ export default async function deleteBooking(id: string|null) {
 
         method: "DELETE",
         headers: {
-            'accept': 'application/json',
-            "Authorization": `Bearer ${session?.user.token}`,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            "id": id
-        })
+            'accept': '*/*',
+            "Authorization": `Bearer ${session?.user.token}`
+        }
     })
 
     if(!response.ok){

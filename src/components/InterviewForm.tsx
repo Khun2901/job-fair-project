@@ -1,4 +1,5 @@
 'use client'
+
 import { DatePicker } from '@mui/x-date-pickers'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
@@ -14,7 +15,7 @@ import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import { useSession } from "next-auth/react"
 import postBooking from '@/libs/postBooking'
-import getCompanies from '@/libs/getCompanies'
+import { FormControl } from '@mui/material';
 
 export default function InterviewForm(){
 
@@ -32,6 +33,7 @@ export default function InterviewForm(){
 
     const [name, setName] = useState(nameParam || '')
     const [company, setCompany] = useState(companyParam || 'Agoda')
+    const [companyId, setCompanyId] = useState(cid || '')
     const [interviewDate, setInterviewDate] = useState<Date|null>(interviewDateDayjs)
 
     const dispatch = useDispatch<AppDispatch>()
@@ -46,6 +48,7 @@ export default function InterviewForm(){
         dispatch(addBookingItem(item))
         }
     }
+
     const removeOldBooking = () => {
         if(nameParam && companyParam && interviewDateParam){
         const item: BookingItem = {
@@ -153,8 +156,8 @@ export default function InterviewForm(){
                                     removeOldBooking();
                                 }
                                 makeBooking();
-                                console.log(dayjs(interviewDate).format("YYYY-MM-DD"));
-                                postBooking("6544d52216ce3493911112fd", dayjs(interviewDate).format("YYYY-MM-DD"));
+                                //console.log(dayjs(interviewDate).format("YYYY-MM-DD"));
+                                postBooking(companyId, dayjs(interviewDate).format("YYYY-MM-DD"));
                                 router.push('/interviewcart');
                             }}
                             >
