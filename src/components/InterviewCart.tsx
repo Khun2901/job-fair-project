@@ -41,7 +41,7 @@ export default function InterviewCart() {
             bookingItems.map((bookingItem) => (
                 
                 <div className="bg-slate-200 rounded-lg flex flex-row justify-between p-4 my-4 shadow-md"
-                key = {bookingItem.firstname && bookingItem.lastname && bookingItem.company}>
+                key = {bookingItem.name && bookingItem.company && bookingItem.interviewdate}>
 
                     <div>
                         <div className="text-sm">Interview Date:</div>
@@ -52,8 +52,7 @@ export default function InterviewCart() {
 
                     <div className="flex flex-col text-center">
                         <div className="text-sm">Booking for:</div>
-                        <div className="text-xl">{bookingItem.firstname} {bookingItem.lastname}</div>
-                        <div className="text-md">Position: {bookingItem.position}</div>
+                        <div className="text-xl">{bookingItem.name}</div>
                         <div className="text-md">Company: {bookingItem.company}</div>
                     </div>
 
@@ -66,12 +65,11 @@ export default function InterviewCart() {
                         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-100'
                         onClick={ (e) => {
                             e.stopPropagation();
-                            router.push(`/interview?firstName=${bookingItem.firstname}&lastName=${bookingItem.lastname}&position=${bookingItem.position}&company=${bookingItem.company}&interviewDate=${bookingItem.interviewdate}&status=edit`);
+                            router.push(`/interview?firstName=${bookingItem.name}&company=${bookingItem.company}&interviewDate=${bookingItem.interviewdate}&status=edit`);
                         }}
                         >
                         <Image src={'/edit.png'} alt="edit" width={20} height={20}/>
                         </button>
-                        
                         
                         <button type='submit'
                         className='rounded-md bg-red-400 m-1 p-2 text-sm border-2 border-red-400 

@@ -2,6 +2,7 @@ import InterviewForm from "@/components/InterviewForm";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { getServerSession } from 'next-auth'
 import getUserProfile from "@/libs/getUserProfile";
+import InterviewForm2 from "@/components/InterviewForm2";
 
 export default async function InterviewPage() {
 

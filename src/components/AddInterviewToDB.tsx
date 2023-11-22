@@ -1,32 +1,33 @@
 'use server'
-import { revalidateTag } from 'next/cache'
-import { redirect } from 'next/navigation'
-import { dbConnect } from '@/db/dbConnect'
-import Booking from '@/db/models/Booking'
-import { useSession } from 'next-auth/react'
 
-const { data:session} = useSession()
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
-const addInterviewToMongo = async (bookInterviewForm: FormData) => {
+export default async function addInterviewToMongo(cid: string|null, interviewDate: string|null) {
 
-    const date = bookInterviewForm.get('date')
-    const user = bookInterviewForm.get('user')
-    const company = bookInterviewForm.get('company')
-    
-    try {
-        await dbConnect()
-        const booking = await Booking.create(
-            {
-                'bookingDate': date,
-                'user': user,
-                'company': company,
-            }
-        )
-    } catch (error) {
-        console.log(error)
+    const session = await getServerSession(authOptions)
+    if(!session || !session.user.token) return (
+        <div className="mt-[100px]">Please login first.</div>
+    )
+
+    const response = await fetch(`http://localhost:5000/api/v1/companies/${cid}/bookings`, {
+
+        method: "POST",
+        headers: {
+            "Accept": 'application/json',
+            "Authorization": `Bearer ${session.user.token}`,
+            "Content-Type": "application/json",
+
+        },
+        body: JSON.stringify({
+            bookingDate: interviewDate
+        })
+    })
+
+    if(!response.ok){
+        throw new Error("Failed to post booking data.")
     }
-    revalidateTag('bookings')
-    redirect('/interviewcart')
-}
 
-export { addInterviewToMongo }
+    return await response.json()
+
+}

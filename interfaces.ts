@@ -1,7 +1,5 @@
 export interface BookingItem {
-    firstname : string
-    lastname : string
+    name : string
     company : string
-    position : string
     interviewdate : string
 }

@@ -17,8 +17,7 @@ export const bookSlice = createSlice({
         addBookingItem: (state, action: PayloadAction<BookingItem>) => {
             const repeatedItem = state.bookingItems.find((obj) => {
                 return (
-                    obj.firstname === action.payload.firstname &&
-                    obj.lastname === action.payload.lastname &&
+                    obj.name === action.payload.name &&
                     obj.company === action.payload.company
                 )
             })
@@ -37,8 +36,7 @@ export const bookSlice = createSlice({
         removeBookingItem: (state, action: PayloadAction<BookingItem>) => {
             const remainItems = state.bookingItems.filter((obj) => {
                 return (
-                    obj.firstname !== action.payload.firstname ||
-                    obj.lastname !== action.payload.lastname ||
+                    obj.name !== action.payload.name ||
                     obj.company !== action.payload.company
                 )
                 })
