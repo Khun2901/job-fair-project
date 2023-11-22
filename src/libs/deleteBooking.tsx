@@ -4,7 +4,7 @@ export default async function deleteBooking(id: string|null) {
 
         method: "DELETE",
         headers: {
-            "Content-Type": "application/json",
+            
         },
         body: JSON.stringify({
             id: id
