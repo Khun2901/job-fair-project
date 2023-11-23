@@ -17,6 +17,7 @@ import { useSession } from "next-auth/react"
 import postBooking from '@/libs/postBooking'
 import { FormControl } from '@mui/material';
 import updateBooking from '@/libs/updateBooking'
+import getCompanies from '@/libs/getCompanies'
 
 export default function InterviewForm(){
 
@@ -29,11 +30,12 @@ export default function InterviewForm(){
     const cid = urlParams.get('cid')
     const interviewDateParam = urlParams.get('interviewDate')
     const dateArr = interviewDateParam?.split('-') // YYYY-DD-MM
-    const interviewDateDayjs = dateArr ? dayjs(`${dateArr[0]}-${dateArr[2]}-${dateArr[1]}`) : null
+    const now = new Date()
+    const interviewDateDayjs = dateArr ? dayjs(`${dateArr[0]}-${dateArr[2]}-${dateArr[1]}`) : dayjs(now)
     const statusParam = urlParams.get('status')
     const bid = urlParams.get('booking_id')
 
-    const [name, setName] = useState(session?.user?.name || nameParam || '')
+    const [name, setName] = useState(nameParam || session?.user.name || '')
     const [company, setCompany] = useState(companyParam || 'Agoda')
     const [companyId, setCompanyId] = useState(cid || '')
     const [interviewDate, setInterviewDate] = useState<Date|null>(interviewDateDayjs)
@@ -83,7 +85,7 @@ export default function InterviewForm(){
                             type='text'
                             name='name' 
                             id='name'
-                            className='block w-full px-2 rounded-md border-[1px] border-neutral-400 py-1.5 
+                            className='block w-full px-4 rounded-md border-[1px] border-neutral-400 py-1.5 
                             text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 
                             focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6
                             hover:border-black'
@@ -92,6 +94,26 @@ export default function InterviewForm(){
                     </div>
 
                     <div className='sm:col-span-1'>
+                        <label className='block text-lg font-semibold leading-6 text-gray-900 ml-2 mb-2'>
+                            Company
+                        </label>
+                        <input
+                            required
+                            readOnly={statusParam === 'adminedit' || statusParam === 'edit'}
+                            minLength={4}
+                            type='text'
+                            name='company' 
+                            id='company'
+                            className='block w-full px-4 rounded-md border-[1px] border-neutral-400 py-1.5 
+                            text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 
+                            focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6
+                            hover:border-black'
+                            value={company}
+                            onChange={(e)=>setCompany(e.target.value)}
+                        />        
+                    </div>
+
+                    {/* <div className='sm:col-span-1'>
                         <label className='block text-lg font-semibold leading-6 text-gray-900 ml-2 mb-2'>
                             Select Company
                         </label>
@@ -104,13 +126,10 @@ export default function InterviewForm(){
                                 value={company}
                                 onChange={(e)=>setCompany(e.target.value)}
                             >
-                                <MenuItem value='Agoda' id="6544d52216ce3493911112fd">Agoda</MenuItem>
-                                <MenuItem value='booking.com'>booking.com</MenuItem>
-                                <MenuItem value='CLEVERSE'>CLEVERSE</MenuItem>
-                                <MenuItem value='Dell'>Dell</MenuItem>
+                                <MenuItem value='Agoda'>Agoda</MenuItem>
                             </Select>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className='sm:col-span-1' id='date'>
                         <label className='block text-lg font-semibold leading-6 text-gray-900 ml-2 mb-2'>

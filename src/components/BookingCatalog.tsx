@@ -3,6 +3,7 @@ import deleteBooking from "@/libs/deleteBooking";
 import dayjs from "dayjs";
 import Image from "next/image"
 import Link from "next/link";
+import DeleteBookingButton from "./DeleteBookingButton";
 
 export default async function BookingCatalog({bookingJson}: {bookingJson: Object}) {
 
@@ -15,7 +16,7 @@ export default async function BookingCatalog({bookingJson}: {bookingJson: Object
             bookingJsonReady.data.map((bookingItem: Object)=>(
                 <div className="bg-slate-200 rounded-lg flex flex-row justify-between p-4 my-4 shadow-md"
                 key = {bookingItem._id}>
-                    <div className="text-left flex flex-col place-content-evenly">
+                    <div className="ml-4 text-left flex flex-col place-content-evenly">
                         <div className="text-md font-bold">Interview Date: {dayjs(bookingItem.bookingDate).format('DD MMM YYYY')}</div>
                         <div className="text-sm">Last Edited: {dayjs(bookingItem.createdAt).format('DD MMM YYYY')}</div>
                     </div> 
@@ -37,15 +38,7 @@ export default async function BookingCatalog({bookingJson}: {bookingJson: Object
                         </button>
                         </Link>
                         
-                        <button type='submit'
-                        className='rounded-md bg-red-400 m-1 py-6 px-4 text-sm border-2 border-red-400 
-                        font-semibold text-white shadow-sm hover:bg-white focus-visible:outline 
-                        focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600'
-                        onClick={ (e) => {e.stopPropagation(), 
-                            deleteBooking(bookingItem._id)
-                            }}>
-                        <Image src={'/delete.png'} alt="delete" width={20} height={20}/>
-                        </button>
+                        <DeleteBookingButton bid={bookingItem._id}/>
                     </div>
                 </div>
                 ) 
