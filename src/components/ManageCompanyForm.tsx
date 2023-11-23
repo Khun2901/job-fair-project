@@ -1,6 +1,7 @@
 import putCompany from "@/libs/putCompany"
-import { useSearchParams } from "next/navigation"
+import { redirect, useSearchParams } from "next/navigation"
 import Link from "next/link"
+import { revalidateTag } from "next/cache"
 
 export default async function ManageCompanyForm({cid}: {cid:string|null}) {
 
@@ -17,6 +18,7 @@ export default async function ManageCompanyForm({cid}: {cid:string|null}) {
 
         putCompany(cid, name, business, address, province, postalcode, tel, picture)
 
+        redirect('/company')
     }
 
     return(

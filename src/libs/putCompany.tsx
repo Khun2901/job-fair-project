@@ -12,7 +12,7 @@ export default async function putCompany(cid: string|null, name: string|undefine
     }
 
     const response = await fetch(`http://localhost:5000/api/v1/companies/${cid}`, {
-
+    
         method: "PUT",
         headers: {
             "accept": "application/json",

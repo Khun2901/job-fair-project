@@ -43,7 +43,6 @@ export default async function AddCompanyForm() {
         } catch(error) {
             console.log(error)
         }
-        revalidateTag("companies")
         redirect("/company")
     }
 
