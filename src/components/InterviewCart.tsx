@@ -1,91 +1,51 @@
 'use client'
-import { useAppSelector, AppDispatch } from "@/redux/store"
-import { useDispatch } from "react-redux"
-import { removeBookingItem } from "@/redux/features/bookSlice"
-import Image from 'next/image'
-import { useRouter } from "next/navigation"
-import { useSession } from "next-auth/react"
-import { useModel } from "@/hooks/useModel"
-import DeleteConfirmation from "@/components/modal/DeleteConfirmation"
-import { useState } from "react"
-import { BookingItem } from "../../interfaces"
-import deleteBooking from "@/libs/deleteBooking"
+import deleteBooking from "@/libs/deleteBooking";
+import dayjs from "dayjs";
+import Image from "next/image"
 
-export default function InterviewCart() {
+export default async function InterviewCart({bookingJson}: {bookingJson: Object}) {
+    const bookingJsonReady = await bookingJson
 
-    const [isOpen,onOpen,onClose] = useModel()
-
-    const router = useRouter()
-    const { data: session } = useSession()
-    const bookingItems = useAppSelector(state => state.bookSlice.bookingItems)
-    const dispatch = useDispatch<AppDispatch>()
-    const [selectedItem, setSelectedItem] = useState<BookingItem | null>(null);
-
-    const handleOpenConfirmation = (bookingItem: BookingItem) => {
-        onOpen();
-        setSelectedItem(bookingItem);
-    };
-
-    const handleConfirmDelete = () => {
-        if (selectedItem) {
-            dispatch(removeBookingItem(selectedItem));
-            setSelectedItem(null);
-            onClose;
-        }
-    };
-    
     return (
-        <>
-        <DeleteConfirmation isOpen={isOpen} onClose={onClose} onConfirmDelete={handleConfirmDelete}></DeleteConfirmation>
+        <div className="mt-12">
+        
         {
-            
-            bookingItems.map((bookingItem) => (
-                
+            bookingJsonReady.data.map((bookingItem: Object)=>(
                 <div className="bg-slate-200 rounded-lg flex flex-row justify-between p-4 my-4 shadow-md"
-                key = {bookingItem.name && bookingItem.company && bookingItem.interviewdate}>
-
-                    <div>
-                        <div className="text-sm">Interview Date:</div>
-                        <div className="text-xl">{bookingItem.interviewdate}</div>
-                        <br></br>
-                        <div className="text-md">User: {session?.user?.name}</div>
-                    </div>
-
-                    <div className="flex flex-col text-center">
-                        <div className="text-sm">Booking for:</div>
-                        <div className="text-xl">{bookingItem.name}</div>
-                        <div className="text-md">Company: {bookingItem.company}</div>
+                key = {bookingItem._id}>
+                    <div className="text-left flex flex-col place-content-evenly">
+                        <div className="text-md font-bold">Interview Date: {dayjs(bookingItem.bookingDate).format('DD MMM YYYY')}</div>
+                        <div className="text-sm">Last Edited: {dayjs(bookingItem.createdAt).format('DD MMM YYYY')}</div>
+                    </div> 
+                                                
+                    <div className="flex flex-col text-center place-content-center">
+                        <div className="text-sm ">User: <span className="text-xl font-bold">{bookingItem.user.name}</span></div>
+                        <div className="text-md">Company: {bookingItem.company.name}</div>
                     </div>
 
                     <div className="flex flex-row">
-
                         
                         <button type='submit'
-                        className='rounded-md bg-neutral-300 m-1 p-2 text-sm border-2 border-neutral-300 
+                        className='rounded-md bg-neutral-300 m-1 py-6 px-4 text-sm border-2 border-neutral-300 
                         font-semibold text-white shadow-sm hover:bg-neutral-100 focus-visible:outline
                         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-100'
-                        onClick={ (e) => {
-                            e.stopPropagation();
-                            router.push(`/interview?firstName=${bookingItem.name}&company=${bookingItem.company}&interviewDate=${bookingItem.interviewdate}&status=edit`);
-                        }}
+                        
                         >
                         <Image src={'/edit.png'} alt="edit" width={20} height={20}/>
                         </button>
                         
                         <button type='submit'
-                        className='rounded-md bg-red-400 m-1 p-2 text-sm border-2 border-red-400 
+                        className='rounded-md bg-red-400 m-1 py-6 px-4 text-sm border-2 border-red-400 
                         font-semibold text-white shadow-sm hover:bg-white focus-visible:outline 
                         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600'
-                        // onClick={ () => dispatch(removeBookingItem(bookingItem))}
-                        onClick={() => {handleOpenConfirmation(bookingItem)}}
-                        >
+                        onClick={ (e) => {e.stopPropagation(), deleteBooking(bookingItem._id)}}>
                         <Image src={'/delete.png'} alt="delete" width={20} height={20}/>
                         </button>
                     </div>
                 </div>
-                
-            ))
+                ) 
+            )
         }
-        </>
+        </div>
     )
 }
