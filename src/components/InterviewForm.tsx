@@ -33,7 +33,7 @@ export default function InterviewForm(){
     const statusParam = urlParams.get('status')
     const bid = urlParams.get('booking_id')
 
-    const [name, setName] = useState(nameParam || '')
+    const [name, setName] = useState(session?.user?.name || nameParam || '')
     const [company, setCompany] = useState(companyParam || 'Agoda')
     const [companyId, setCompanyId] = useState(cid || '')
     const [interviewDate, setInterviewDate] = useState<Date|null>(interviewDateDayjs)
@@ -63,14 +63,14 @@ export default function InterviewForm(){
     }
 
     return(
-        <div className='w-auto'>
+        <div className='w-[40%] z-10 h-auto mx-6 mt-2 p-4 bg-mycolor rounded-xl border-2 border-gray-600'>
         
-            <form className='relative p-6 z-20'>
+            <form className='relative p-4 z-20'>
                 <div className='text-center text-3xl font-bold mb-5'>
                     Book Your Interview
                 </div>               
 
-                <div className='grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2'>
+                <div className='grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-1'>
 
                     <div className='sm:col-span-1'>
                         <label className='block text-lg font-semibold leading-6 text-gray-900 ml-2 mb-2'>
@@ -78,6 +78,7 @@ export default function InterviewForm(){
                         </label>
                         <input
                             required
+                            readOnly={true}
                             minLength={4}
                             type='text'
                             name='name' 
@@ -87,7 +88,6 @@ export default function InterviewForm(){
                             focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6
                             hover:border-black'
                             value={name}
-                            onChange={(e)=>setName(e.target.value)}
                         />        
                     </div>
 
@@ -124,10 +124,6 @@ export default function InterviewForm(){
                                 console.log(interviewDateDayjs)}}
                             />
                         </LocalizationProvider>
-                    </div>
-                    
-                    <div className='sm:col-span-1' id='user'>
-                        {session?.user?.name}
                     </div>
 
                     <div className='sm:col-span-full flex justify-end gap-5 mr-5'>
