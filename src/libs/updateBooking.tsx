@@ -1,6 +1,8 @@
 'use server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { revalidateTag } from 'next/cache'
+import { redirect } from 'next/navigation'
 export default async function updateBooking(id: string|null, interviewDate: string|null) {
 
     const session = await getServerSession(authOptions)
@@ -17,11 +19,13 @@ export default async function updateBooking(id: string|null, interviewDate: stri
             'bookingDate': interviewDate
         })
         
-    })
+    }
+    )
 
     if(!response.ok){
         throw new Error("Failed to update booking data.")
     }
+    revalidateTag('bookings')
 
     return await response.json()
 }

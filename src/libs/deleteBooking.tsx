@@ -24,6 +24,8 @@ export default async function deleteBooking(id: string|null) {
     if(!response.ok){
         throw new Error("Failed to delete booking data.")
     }
+    revalidateTag('bookings')
+    redirect('/managecart')
     return await response.json()
 
 }
