@@ -139,7 +139,7 @@ export default function InterviewForm(){
                             shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 
                             focus-visible:outline-offset-2 focus-visible:outline-red-500'
                             onClick={() => {
-                                router.push('/interviewcart')
+                                router.push('/managecart')
                             }}
                             >
                                 CANCEL
@@ -159,7 +159,7 @@ export default function InterviewForm(){
                                     makeBooking();
                                     console.log(dayjs(interviewDate).format("YYYY-MM-DD"));
                                     postBooking("655e4a3505e9f05ceecc1094", dayjs(interviewDate).format("YYYY-MM-DD"));
-                                    router.push('/interviewcart');
+                                    router.push('/managecart');
                                 }
                                 else if(statusParam === 'adminedit') {
                                     updateBooking(bid, dayjs(interviewDate).format("YYYY-MM-DD"));
@@ -169,7 +169,7 @@ export default function InterviewForm(){
                                     makeBooking();
                                     console.log(dayjs(interviewDate).format("YYYY-MM-DD"));
                                     postBooking("655e4a3505e9f05ceecc1094", dayjs(interviewDate).format("YYYY-MM-DD"));
-                                    router.push('/interviewcart');
+                                    router.push('/managecart');
                                 }
                                 
                             }}

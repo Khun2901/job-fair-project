@@ -9,12 +9,14 @@ export default async function updateBooking(id: string|null, interviewDate: stri
         method: "PUT",
         headers: {
             "accept": "*/*",
-            "authorization": `Bearer ${session?.user.token}`
+            "Authorization": `Bearer ${session?.user.token}`,
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
             'id': id,
             'bookingDate': interviewDate
         })
+        
     })
 
     if(!response.ok){

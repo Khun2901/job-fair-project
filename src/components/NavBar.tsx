@@ -35,20 +35,14 @@ export default async function NavBar() {
             </div>
 
             <div className='grow flex flex-row justify-end gap-5 mr-5 h-[100%] place-items-center'>
-
-                {
-                profile?.data.role == 'admin'?
+                
                 <Link href='/managecart' className='mr-5'>
+                    {profile?.data.role == 'admin'?
                     <Image src='/manage.png' width={30} height={30} alt='managecart'/>
-                </Link>
-                :
-                null
-                }
-                
-                <Link href='/interviewcart' className='mr-5'>
+                    :
                     <Image src='/bookingcart.png' width={30} height={30} alt='bookingcart'/>
+                    }
                 </Link>
-                
                 
                 <div> 
                     {
