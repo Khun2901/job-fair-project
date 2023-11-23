@@ -23,13 +23,13 @@ export default function DeleteCompanyButton({cid}: {cid: string|null}) {
 
     return (
         <>
-            <DeleteConfirmation isOpen={isOpen} onClose={redirect('/company')} onConfirmDelete={handleConfirmDelete}></DeleteConfirmation>
+            <DeleteConfirmation isOpen={isOpen} onClose={onClose} onConfirmDelete={handleConfirmDelete}></DeleteConfirmation>
             <button type='submit'
                 className='rounded-md bg-red-400 my-1 p-2 text-sm border-2 border-red-400 
                 font-semibold text-white shadow-sm hover:bg-white focus-visible:outline 
                 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600'
                 // onClick={ () => dispatch(removeBookingItem(bookingItem))}
-                onClick={() => {handleOpenConfirmation(cid)}}
+                onClick={() => {handleOpenConfirmation(cid); redirect('/company')}}
                 >
                 <Image src={'/delete.png'} alt="delete" width={20} height={20}/>
             </button>
