@@ -10,9 +10,9 @@ export default async function BookingCatalog({bookingJson}: {bookingJson: Object
 
     return (
         <div className="mt-12">
+
         {
             bookingJsonReady.data.map((bookingItem: Object)=>(
-                
                 <div className="bg-slate-200 rounded-lg flex flex-row justify-between p-4 my-4 shadow-md"
                 key = {bookingItem._id}>
                     <div className="text-left flex flex-col place-content-evenly">
